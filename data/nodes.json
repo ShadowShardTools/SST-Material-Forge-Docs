@@ -103,172 +103,6 @@
       ]
     },
     {
-      "type": "perlin-noise",
-      "label": "Perlin Noise",
-      "category": "Noise",
-      "description": "Tileable fractal gradient noise.",
-      "tags": [
-        "clouds",
-        "fbm",
-        "fractal",
-        "random",
-        "organic"
-      ],
-      "inputs": [
-        {
-          "id": "param:scale",
-          "label": "Scale",
-          "type": "int",
-          "drives": "scale"
-        },
-        {
-          "id": "param:octaves",
-          "label": "Octaves",
-          "type": "int",
-          "drives": "octaves"
-        },
-        {
-          "id": "param:persistence",
-          "label": "Persistence",
-          "type": "grayscale",
-          "drives": "persistence"
-        },
-        {
-          "id": "param:seed",
-          "label": "Seed",
-          "type": "int",
-          "drives": "seed"
-        }
-      ],
-      "outputs": [
-        {
-          "id": "out",
-          "label": "Output",
-          "type": "grayscale"
-        }
-      ],
-      "parameters": [
-        {
-          "id": "scale",
-          "label": "Scale",
-          "kind": "int",
-          "default": 4,
-          "min": 1,
-          "max": 32
-        },
-        {
-          "id": "octaves",
-          "label": "Octaves",
-          "kind": "int",
-          "default": 5,
-          "min": 1,
-          "max": 8
-        },
-        {
-          "id": "persistence",
-          "label": "Persistence",
-          "kind": "float",
-          "default": 0.5,
-          "min": 0,
-          "max": 1
-        },
-        {
-          "id": "seed",
-          "label": "Seed",
-          "kind": "int",
-          "default": 0,
-          "min": 0,
-          "max": 999
-        }
-      ]
-    },
-    {
-      "type": "cells",
-      "label": "Cells",
-      "category": "Noise",
-      "description": "Tileable Voronoi cells: distance field, edges or flat cell values.",
-      "tags": [
-        "voronoi",
-        "worley",
-        "stone",
-        "cracks",
-        "cellular"
-      ],
-      "inputs": [
-        {
-          "id": "param:scale",
-          "label": "Scale",
-          "type": "int",
-          "drives": "scale"
-        },
-        {
-          "id": "param:jitter",
-          "label": "Jitter",
-          "type": "grayscale",
-          "drives": "jitter"
-        },
-        {
-          "id": "param:seed",
-          "label": "Seed",
-          "type": "int",
-          "drives": "seed"
-        }
-      ],
-      "outputs": [
-        {
-          "id": "out",
-          "label": "Output",
-          "type": "grayscale"
-        }
-      ],
-      "parameters": [
-        {
-          "id": "scale",
-          "label": "Scale",
-          "kind": "int",
-          "default": 6,
-          "min": 1,
-          "max": 32
-        },
-        {
-          "id": "mode",
-          "label": "Mode",
-          "kind": "enum",
-          "default": "distance",
-          "options": [
-            {
-              "value": "distance",
-              "label": "Distance"
-            },
-            {
-              "value": "edges",
-              "label": "Edges"
-            },
-            {
-              "value": "flat",
-              "label": "Flat Cells"
-            }
-          ]
-        },
-        {
-          "id": "jitter",
-          "label": "Jitter",
-          "kind": "float",
-          "default": 0.9,
-          "min": 0,
-          "max": 1
-        },
-        {
-          "id": "seed",
-          "label": "Seed",
-          "kind": "int",
-          "default": 0,
-          "min": 0,
-          "max": 999
-        }
-      ]
-    },
-    {
       "type": "checkerboard",
       "label": "Checkerboard",
       "category": "Patterns",
@@ -1236,14 +1070,25 @@
       ]
     },
     {
-      "type": "noise",
-      "label": "Noise",
+      "type": "fractal-noise",
+      "label": "Fractal Noise",
       "category": "Noise",
-      "description": "Perlin, Simplex or Value noise: Pivot + Amplitude × noise, where noise is roughly in [−1, 1].",
+      "description": "Octaves of the Basis noise, each Lacunarity times the frequency and Diminish times the amplitude of the last, summed into Pivot + Amplitude × the sum — 0 to 1 about the middle at the defaults. Ridged octaves give sharp crests, Billow round lobes. Clouds, dirt, grime and every organic variation start here. One octave is plain Perlin, Simplex or Value noise. It replaces the single-octave Noise and the Perlin Noise nodes, whose graphs open as this.",
       "tags": [
+        "noise",
         "perlin",
-        "random",
-        "clouds"
+        "perlin noise",
+        "simplex",
+        "value",
+        "fractal",
+        "fbm",
+        "octaves",
+        "clouds",
+        "turbulence",
+        "organic",
+        "grime",
+        "dirt",
+        "random"
       ],
       "inputs": [
         {
@@ -1263,154 +1108,6 @@
           "label": "Pivot",
           "type": "grayscale",
           "drives": "pivot"
-        },
-        {
-          "id": "param:warp",
-          "label": "Warp",
-          "type": "grayscale",
-          "drives": "warp"
-        },
-        {
-          "id": "param:stretch",
-          "label": "Stretch",
-          "type": "grayscale",
-          "drives": "stretch"
-        },
-        {
-          "id": "param:seed",
-          "label": "Seed",
-          "type": "int",
-          "drives": "seed"
-        }
-      ],
-      "outputs": [
-        {
-          "id": "out",
-          "label": "Output",
-          "type": "grayscale",
-          "adaptive": true
-        }
-      ],
-      "parameters": [
-        {
-          "id": "scale",
-          "label": "Scale",
-          "kind": "int",
-          "default": 8,
-          "min": 1,
-          "max": 64
-        },
-        {
-          "id": "basis",
-          "label": "Basis",
-          "kind": "enum",
-          "default": "perlin",
-          "options": [
-            {
-              "value": "perlin",
-              "label": "Perlin"
-            },
-            {
-              "value": "simplex",
-              "label": "Simplex (does not tile)"
-            },
-            {
-              "value": "value",
-              "label": "Value"
-            }
-          ]
-        },
-        {
-          "id": "amplitude",
-          "label": "Amplitude",
-          "kind": "float",
-          "default": 1,
-          "min": 0,
-          "max": 2
-        },
-        {
-          "id": "pivot",
-          "label": "Pivot",
-          "kind": "float",
-          "default": 0,
-          "min": -1,
-          "max": 1
-        },
-        {
-          "id": "warp",
-          "label": "Warp",
-          "kind": "float",
-          "group": "Shape",
-          "default": 0,
-          "min": 0,
-          "max": 1
-        },
-        {
-          "id": "stretch",
-          "label": "Stretch",
-          "kind": "float",
-          "group": "Shape",
-          "default": 1,
-          "min": 0.25,
-          "max": 4
-        },
-        {
-          "id": "channels",
-          "label": "Channels",
-          "kind": "enum",
-          "default": "grayscale",
-          "options": [
-            {
-              "value": "grayscale",
-              "label": "Grayscale"
-            },
-            {
-              "value": "rg",
-              "label": "RG"
-            },
-            {
-              "value": "rgb",
-              "label": "RGB"
-            },
-            {
-              "value": "rgba",
-              "label": "RGBA"
-            }
-          ]
-        },
-        {
-          "id": "seed",
-          "label": "Seed",
-          "kind": "int",
-          "default": 0,
-          "min": 0,
-          "max": 999
-        }
-      ]
-    },
-    {
-      "type": "fractal",
-      "label": "Fractal",
-      "category": "Noise",
-      "description": "Zero-centred fractal noise: octaves of the Basis noise, each Lacunarity times the frequency and Diminish times the amplitude of the last. Ridged octaves give sharp crests, Billow round lobes.",
-      "tags": [
-        "fbm",
-        "octaves",
-        "clouds",
-        "turbulence"
-      ],
-      "inputs": [
-        {
-          "id": "param:scale",
-          "label": "Scale",
-          "type": "int",
-          "drives": "scale"
-        },
-        {
-          "id": "param:amplitude",
-          "label": "Amplitude",
-          "type": "grayscale",
-          "drives": "amplitude"
         },
         {
           "id": "param:octaves",
@@ -1510,9 +1207,17 @@
           "id": "amplitude",
           "label": "Amplitude",
           "kind": "float",
-          "default": 1,
+          "default": 0.5,
           "min": 0,
           "max": 2
+        },
+        {
+          "id": "pivot",
+          "label": "Pivot",
+          "kind": "float",
+          "default": 0.5,
+          "min": -1,
+          "max": 1
         },
         {
           "id": "octaves",
@@ -1591,113 +1296,20 @@
       ]
     },
     {
-      "type": "cellnoise",
-      "label": "Cell Noise",
-      "category": "Noise",
-      "description": "Cellular noise: one random value in [0, 1) per cell.",
-      "tags": [
-        "random",
-        "cells",
-        "pixelated",
-        "blocks"
-      ],
-      "inputs": [
-        {
-          "id": "param:scale",
-          "label": "Scale",
-          "type": "int",
-          "drives": "scale"
-        },
-        {
-          "id": "param:warp",
-          "label": "Warp",
-          "type": "grayscale",
-          "drives": "warp"
-        },
-        {
-          "id": "param:stretch",
-          "label": "Stretch",
-          "type": "grayscale",
-          "drives": "stretch"
-        },
-        {
-          "id": "param:seed",
-          "label": "Seed",
-          "type": "int",
-          "drives": "seed"
-        }
-      ],
-      "outputs": [
-        {
-          "id": "out",
-          "label": "Output",
-          "type": "grayscale",
-          "adaptive": true
-        }
-      ],
-      "parameters": [
-        {
-          "id": "scale",
-          "label": "Scale",
-          "kind": "int",
-          "default": 8,
-          "min": 1,
-          "max": 64
-        },
-        {
-          "id": "warp",
-          "label": "Warp",
-          "kind": "float",
-          "group": "Shape",
-          "default": 0,
-          "min": 0,
-          "max": 1
-        },
-        {
-          "id": "stretch",
-          "label": "Stretch",
-          "kind": "float",
-          "group": "Shape",
-          "default": 1,
-          "min": 0.25,
-          "max": 4
-        },
-        {
-          "id": "channels",
-          "label": "Channels",
-          "kind": "enum",
-          "default": "grayscale",
-          "options": [
-            {
-              "value": "grayscale",
-              "label": "Grayscale"
-            },
-            {
-              "value": "rgb",
-              "label": "RGB"
-            }
-          ]
-        },
-        {
-          "id": "seed",
-          "label": "Seed",
-          "kind": "int",
-          "default": 0,
-          "min": 0,
-          "max": 999
-        }
-      ]
-    },
-    {
       "type": "worleynoise",
       "label": "Worley Noise",
       "category": "Noise",
-      "description": "Worley noise with centred jitter. Channels hold the nearest 1, 2 or 3 features: their distance, or what Style picks instead: the cell value, the cracks between cells, the second nearest feature or dots at the feature points.",
+      "description": "Worley noise with centred jitter. Channels hold the nearest one to four features: their distance, or what Style picks instead: the cell value, the cracks between cells, the second nearest feature or dots at the feature points. Cell Value at Jitter 0 is a grid of flat random squares. It replaces the Cells and Cell Noise nodes, whose graphs open as this.",
       "tags": [
         "voronoi",
+        "worley",
         "cells",
+        "cell noise",
+        "cellular",
         "stone",
-        "cracks"
+        "cracks",
+        "pixelated",
+        "blocks"
       ],
       "inputs": [
         {
@@ -1819,314 +1431,12 @@
             {
               "value": "rgb",
               "label": "RGB"
+            },
+            {
+              "value": "rgba",
+              "label": "RGBA"
             }
           ]
-        },
-        {
-          "id": "seed",
-          "label": "Seed",
-          "kind": "int",
-          "default": 0,
-          "min": 0,
-          "max": 999
-        }
-      ]
-    },
-    {
-      "type": "unifiednoise",
-      "label": "Unified Noise",
-      "category": "Noise",
-      "description": "Perlin, Cell, Worley or Fractal noise in one node, remapped to [Out Min, Out Max].",
-      "tags": [
-        "perlin",
-        "voronoi",
-        "fbm",
-        "all in one"
-      ],
-      "inputs": [
-        {
-          "id": "param:scale",
-          "label": "Scale",
-          "type": "int",
-          "drives": "scale"
-        },
-        {
-          "id": "param:offsetx",
-          "label": "Offset X",
-          "type": "grayscale",
-          "drives": "offsetx"
-        },
-        {
-          "id": "param:offsety",
-          "label": "Offset Y",
-          "type": "grayscale",
-          "drives": "offsety"
-        },
-        {
-          "id": "param:outmin",
-          "label": "Out Min",
-          "type": "grayscale",
-          "drives": "outmin"
-        },
-        {
-          "id": "param:outmax",
-          "label": "Out Max",
-          "type": "grayscale",
-          "drives": "outmax"
-        },
-        {
-          "id": "param:clampoutput",
-          "label": "Clamp Output",
-          "type": "boolean",
-          "drives": "clampoutput"
-        },
-        {
-          "id": "param:jitter",
-          "label": "Jitter",
-          "type": "grayscale",
-          "drives": "jitter"
-        },
-        {
-          "id": "param:octaves",
-          "label": "Octaves",
-          "type": "int",
-          "drives": "octaves"
-        },
-        {
-          "id": "param:lacunarity",
-          "label": "Lacunarity",
-          "type": "grayscale",
-          "drives": "lacunarity"
-        },
-        {
-          "id": "param:diminish",
-          "label": "Diminish",
-          "type": "grayscale",
-          "drives": "diminish"
-        },
-        {
-          "id": "param:warp",
-          "label": "Warp",
-          "type": "grayscale",
-          "drives": "warp"
-        },
-        {
-          "id": "param:stretch",
-          "label": "Stretch",
-          "type": "grayscale",
-          "drives": "stretch"
-        },
-        {
-          "id": "param:seed",
-          "label": "Seed",
-          "type": "int",
-          "drives": "seed"
-        }
-      ],
-      "outputs": [
-        {
-          "id": "out",
-          "label": "Output",
-          "type": "grayscale"
-        }
-      ],
-      "parameters": [
-        {
-          "id": "scale",
-          "label": "Scale",
-          "kind": "int",
-          "default": 8,
-          "min": 1,
-          "max": 64
-        },
-        {
-          "id": "type",
-          "label": "Type",
-          "kind": "enum",
-          "default": "perlin",
-          "options": [
-            {
-              "value": "perlin",
-              "label": "Perlin"
-            },
-            {
-              "value": "cell",
-              "label": "Cell"
-            },
-            {
-              "value": "worley",
-              "label": "Worley"
-            },
-            {
-              "value": "fractal",
-              "label": "Fractal"
-            }
-          ]
-        },
-        {
-          "id": "freqx",
-          "label": "Frequency X",
-          "kind": "float",
-          "group": "Frequency",
-          "default": 1,
-          "min": 0.25,
-          "max": 8
-        },
-        {
-          "id": "freqy",
-          "label": "Frequency Y",
-          "kind": "float",
-          "group": "Frequency",
-          "default": 1,
-          "min": 0.25,
-          "max": 8
-        },
-        {
-          "id": "offsetx",
-          "label": "Offset X",
-          "kind": "float",
-          "group": "Offset",
-          "default": 0,
-          "min": -10,
-          "max": 10
-        },
-        {
-          "id": "offsety",
-          "label": "Offset Y",
-          "kind": "float",
-          "group": "Offset",
-          "default": 0,
-          "min": -10,
-          "max": 10
-        },
-        {
-          "id": "basis",
-          "label": "Basis",
-          "kind": "enum",
-          "group": "Noise",
-          "default": "perlin",
-          "options": [
-            {
-              "value": "perlin",
-              "label": "Perlin"
-            },
-            {
-              "value": "simplex",
-              "label": "Simplex (does not tile)"
-            },
-            {
-              "value": "value",
-              "label": "Value"
-            }
-          ]
-        },
-        {
-          "id": "outmin",
-          "label": "Out Min",
-          "kind": "float",
-          "group": "Output",
-          "default": 0,
-          "min": -2,
-          "max": 2
-        },
-        {
-          "id": "outmax",
-          "label": "Out Max",
-          "kind": "float",
-          "group": "Output",
-          "default": 1,
-          "min": -2,
-          "max": 2
-        },
-        {
-          "id": "clampoutput",
-          "label": "Clamp Output",
-          "kind": "bool",
-          "group": "Output",
-          "default": true
-        },
-        {
-          "id": "jitter",
-          "label": "Jitter",
-          "kind": "float",
-          "group": "Worley",
-          "default": 1,
-          "min": 0,
-          "max": 1
-        },
-        {
-          "id": "style",
-          "label": "Style",
-          "kind": "enum",
-          "group": "Worley",
-          "default": "distance",
-          "options": [
-            {
-              "value": "distance",
-              "label": "Distance (F1)"
-            },
-            {
-              "value": "solid",
-              "label": "Cell Value"
-            },
-            {
-              "value": "cracks",
-              "label": "Cracks (F2 − F1)"
-            },
-            {
-              "value": "f2",
-              "label": "Second Nearest (F2)"
-            },
-            {
-              "value": "centers",
-              "label": "Centers"
-            }
-          ]
-        },
-        {
-          "id": "octaves",
-          "label": "Octaves",
-          "kind": "int",
-          "group": "Fractal",
-          "default": 3,
-          "min": 1,
-          "max": 8
-        },
-        {
-          "id": "lacunarity",
-          "label": "Lacunarity",
-          "kind": "float",
-          "group": "Fractal",
-          "default": 2,
-          "min": 1,
-          "max": 4
-        },
-        {
-          "id": "diminish",
-          "label": "Diminish",
-          "kind": "float",
-          "group": "Fractal",
-          "default": 0.5,
-          "min": 0,
-          "max": 1
-        },
-        {
-          "id": "warp",
-          "label": "Warp",
-          "kind": "float",
-          "group": "Shape",
-          "default": 0,
-          "min": 0,
-          "max": 1
-        },
-        {
-          "id": "stretch",
-          "label": "Stretch",
-          "kind": "float",
-          "group": "Shape",
-          "default": 1,
-          "min": 0.25,
-          "max": 4
         },
         {
           "id": "seed",
@@ -2140,9 +1450,9 @@
     },
     {
       "type": "flake",
-      "label": "Flake",
+      "label": "Flake Noise",
       "category": "Noise",
-      "description": "Flake pattern for metallic flakes such as car paint. ID is 1–255 as a fraction of 255 (0 with no flake); Flake Normal is a tangent-space normal map.",
+      "description": "Metallic flakes, as in car paint: discs of random size, Coverage of the cells holding one, Scale of them across the image — the larger, the smaller the flakes. Output is 1 on every flake less up to Variation, which Variation Seed draws per flake — so the values can be reshuffled without moving a flake — and 0 between them. Normal is a tangent-space normal map of the flakes, each facing its own way up to 45° from straight out and flat between them; blend it into a surface's normal with Normal Blend, which can also weaken it. Presence is how near the surface each flake sits, for deciding where they overlap.",
       "tags": [
         "glitter",
         "sparkle",
@@ -2151,21 +1461,22 @@
       ],
       "inputs": [
         {
-          "id": "normal",
-          "label": "Normal",
-          "type": "rgb"
-        },
-        {
-          "id": "param:roughness",
-          "label": "Roughness",
-          "type": "grayscale",
-          "drives": "roughness"
+          "id": "param:scale",
+          "label": "Scale",
+          "type": "int",
+          "drives": "scale"
         },
         {
           "id": "param:coverage",
           "label": "Coverage",
           "type": "grayscale",
           "drives": "coverage"
+        },
+        {
+          "id": "param:variation",
+          "label": "Variation",
+          "type": "grayscale",
+          "drives": "variation"
         },
         {
           "id": "param:seed",
@@ -2176,42 +1487,29 @@
       ],
       "outputs": [
         {
-          "id": "id",
-          "label": "ID",
+          "id": "out",
+          "label": "Output",
           "type": "grayscale"
         },
         {
-          "id": "rand",
-          "label": "Rand",
-          "type": "grayscale"
+          "id": "flakenormal",
+          "label": "Normal",
+          "type": "rgb"
         },
         {
           "id": "presence",
           "label": "Presence",
           "type": "grayscale"
-        },
-        {
-          "id": "flakenormal",
-          "label": "Flake Normal",
-          "type": "rgb"
         }
       ],
       "parameters": [
         {
-          "id": "size",
-          "label": "Size",
-          "kind": "float",
-          "default": 0.01,
-          "min": 0.002,
-          "max": 0.25
-        },
-        {
-          "id": "roughness",
-          "label": "Roughness",
-          "kind": "float",
-          "default": 0.1,
-          "min": 0,
-          "max": 1
+          "id": "scale",
+          "label": "Scale",
+          "kind": "int",
+          "default": 100,
+          "min": 1,
+          "max": 8192
         },
         {
           "id": "coverage",
@@ -2220,6 +1518,24 @@
           "default": 0.5,
           "min": 0,
           "max": 1
+        },
+        {
+          "id": "variation",
+          "label": "Variation",
+          "kind": "float",
+          "group": "Variation",
+          "default": 0.5,
+          "min": 0,
+          "max": 1
+        },
+        {
+          "id": "variationseed",
+          "label": "Variation Seed",
+          "kind": "int",
+          "group": "Variation",
+          "default": 0,
+          "min": 0,
+          "max": 999
         },
         {
           "id": "seed",
@@ -2235,7 +1551,7 @@
       "type": "wave",
       "label": "Wave Noise",
       "category": "Noise",
-      "description": "Gabor-like wave noise: sine waves spread by Spread degrees around Angle, at Scale cycles per repeat. Wood grain, ripples and moiré.",
+      "description": "Gabor-like wave noise: sine waves spread by Spread degrees around Angle, at Scale cycles per repeat, as Pivot + Amplitude × the waves. Wood grain, ripples and moiré.",
       "tags": [
         "gabor",
         "wood grain",
@@ -2344,7 +1660,7 @@
           "id": "amplitude",
           "label": "Amplitude",
           "kind": "float",
-          "default": 1,
+          "default": 0.5,
           "min": 0,
           "max": 2
         },
@@ -2352,7 +1668,7 @@
           "id": "pivot",
           "label": "Pivot",
           "kind": "float",
-          "default": 0,
+          "default": 0.5,
           "min": -1,
           "max": 1
         },
@@ -2391,6 +1707,10 @@
             {
               "value": "rgb",
               "label": "RGB"
+            },
+            {
+              "value": "rgba",
+              "label": "RGBA"
             }
           ]
         },
@@ -2408,7 +1728,7 @@
       "type": "bluenoise",
       "label": "Blue Noise",
       "category": "Noise",
-      "description": "Blue noise: random values per cell with their local average removed, so points spread evenly instead of clumping. For dithering, stippling and scattering.",
+      "description": "Blue noise: random values per cell with their local average removed, so points spread evenly instead of clumping. For dithering, stippling and scattering. Scale reaches the working resolution, one value per pixel, and no further: a cell smaller than a pixel would only alias.",
       "tags": [
         "dither",
         "stipple",
@@ -2460,9 +1780,9 @@
           "id": "scale",
           "label": "Scale",
           "kind": "int",
-          "default": 8,
+          "default": 256,
           "min": 1,
-          "max": 64
+          "max": 8192
         },
         {
           "id": "radius",
@@ -2501,8 +1821,16 @@
               "label": "Grayscale"
             },
             {
+              "value": "rg",
+              "label": "RG"
+            },
+            {
               "value": "rgb",
               "label": "RGB"
+            },
+            {
+              "value": "rgba",
+              "label": "RGBA"
             }
           ]
         },
@@ -2520,7 +1848,7 @@
       "type": "curlnoise",
       "label": "Curl Noise",
       "category": "Noise",
-      "description": "Curl of a fractal potential: a swirling, divergence-free flow field, encoded like a normal map. Feed it to a warp for smoke, liquid and marble.",
+      "description": "Curl of a fractal potential: a swirling, divergence-free flow field, X in red and Y in green, encoded like a normal map. Unlike two channels of Fractal Noise, the flow never gathers or spreads, so what it warps folds into swirls rather than pinching. Amplitude 1 fills the image at any number of octaves. Feed it to a warp for smoke, liquid and marble.",
       "tags": [
         "flow",
         "swirl",
@@ -4585,6 +3913,94 @@
           "id": "scale",
           "label": "Scale",
           "kind": "float",
+          "default": 1,
+          "min": 0,
+          "max": 10
+        }
+      ]
+    },
+    {
+      "type": "heighttodepth",
+      "label": "Height to Depth",
+      "category": "Surface",
+      "description": "Turns a height map into a depth map: the same surface measured down rather than up, white where it is deepest and black at its top, for parallax occlusion and other shaders that ask for depth. Normalize stretches the height to its own lowest and highest points first, so the deepest point is fully white and the highest fully black whatever range the height ran over; without it, depth is simply 1 − height.",
+      "tags": [
+        "depth",
+        "depth map",
+        "parallax",
+        "pom",
+        "invert height",
+        "displacement",
+        "inverse"
+      ],
+      "inputs": [
+        {
+          "id": "in",
+          "label": "Height",
+          "type": "grayscale"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "out",
+          "label": "Output",
+          "type": "grayscale"
+        }
+      ],
+      "parameters": [
+        {
+          "id": "normalize",
+          "label": "Normalize",
+          "kind": "bool",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "normaltodepth",
+      "label": "Normal to Depth",
+      "category": "Surface",
+      "description": "The depth map a tangent-space normal map implies: the height Normal to Height recovers, turned into depth — white where deepest, black at the top — for parallax and other depth-reading shaders. Normalize stretches it to the full range, which is usually what you want, since a normal map records slopes and never how deep the surface went; without it, Scale sets the strength as in Normal to Height. Tileable, and with Normal to Height's one caveat: a flat face bounded by a sharp wall comes back slightly domed.",
+      "tags": [
+        "depth",
+        "depth map",
+        "parallax",
+        "pom",
+        "normal to height",
+        "integrate",
+        "reconstruct"
+      ],
+      "inputs": [
+        {
+          "id": "in",
+          "label": "Normal",
+          "type": "rgb"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "out",
+          "label": "Output",
+          "type": "grayscale"
+        }
+      ],
+      "parameters": [
+        {
+          "id": "normalize",
+          "label": "Normalize",
+          "kind": "bool",
+          "default": true
+        },
+        {
+          "id": "scale",
+          "label": "Scale",
+          "kind": "float",
+          "visibleWhen": {
+            "parameter": "normalize",
+            "values": [
+              "false"
+            ]
+          },
           "default": 1,
           "min": 0,
           "max": 10

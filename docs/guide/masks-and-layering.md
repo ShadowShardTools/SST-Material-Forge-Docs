@@ -21,6 +21,8 @@ Connect a height map to **Curvature** or **Ambient Occlusion** to derive the mas
 - **Curvature** finds ridges and cavities at a chosen **Radius**. **Combined** is mid-gray on flat areas, lighter on edges and darker in creases; **Convex** and **Concave** give just the edges (for wear) or just the cavities (for dirt).
 - **Ambient Occlusion** darkens places the surrounding relief hides from the sky, such as grooves and the foot of raised shapes. **Depth** sets how tall the height map stands; **Quality** trades speed for smoothness. Feed the result to the Ambient Occlusion output, or use it as a dirt mask.
 
+Some shaders — parallax occlusion among them — ask for a **depth** map rather than a height map: the same surface measured down, white where it is deepest and black at its top. **Height to Depth** turns a height map into one, and **Normal to Depth** does the same from a normal map, by way of the height Normal to Height recovers. With **Normalize** on, as it starts, the depth is stretched to the full range, so the deepest point is white and the highest black whatever range the height ran over.
+
 ## Reflectance masks
 
 **Fresnel** turns a normal map into how much the surface reflects at each pixel, viewed straight on: low where it faces you, rising towards 1 where it turns away. **Power** sharpens that falloff, and **IOR** sets the strength face-on — glass, 1.52, gives the familiar 0.04. The **IOR** node holds the indices of common materials — air 1.0, water 1.333, glass 1.52, diamond 2.417 and the rest — and can be wired into Fresnel's IOR input, where it replaces the setting; for any other value, use a Constant. Use the result as a mask for edge highlights, wet rims, or to drive roughness and metallic.
