@@ -1,0 +1,77 @@
+/**
+ * Site theme. The primary color is the teal of the application icon
+ * (#19A5AA), darkened in light mode so link text keeps a readable contrast
+ * against white, and lifted toward the icon's highlight in dark mode.
+ */
+
+:root {
+  --ifm-color-primary: #157f83;
+  --ifm-color-primary-dark: #137276;
+  --ifm-color-primary-darker: #126c6f;
+  --ifm-color-primary-darkest: #0f595c;
+  --ifm-color-primary-light: #178c90;
+  --ifm-color-primary-lighter: #189297;
+  --ifm-color-primary-lightest: #1ba5aa;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #3cc9ce;
+  --ifm-color-primary-dark: #31bfc4;
+  --ifm-color-primary-darker: #2eb4b9;
+  --ifm-color-primary-darkest: #269498;
+  --ifm-color-primary-light: #55d0d4;
+  --ifm-color-primary-lighter: #62d3d7;
+  --ifm-color-primary-lightest: #7ee4e8;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* Keycaps, as the editor draws them in its own guide. */
+kbd {
+  display: inline-block;
+  padding: 0.05rem 0.4rem;
+  font-size: 0.85em;
+  font-family: var(--ifm-font-family-monospace);
+  line-height: 1.4;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  background: var(--ifm-color-emphasis-100);
+  box-shadow: none;
+}
+
+/* The node reference's settings tables are wide; let them scroll instead of squeezing. */
+.markdown table {
+  display: block;
+  overflow-x: auto;
+}
+
+/* A node in its example graph, and what it makes there. */
+.node-shots {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 1rem;
+  margin: 0 0 1.25rem;
+}
+
+.node-shot {
+  margin: 0;
+}
+
+.node-shot img {
+  display: block;
+  max-height: 220px;
+  max-width: 100%;
+  border-radius: 6px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  /* What a result leaves transparent shows as it does in the editor, not as page white. */
+  background: #1d1f23;
+}
+
+.node-shot figcaption {
+  font-size: 0.8rem;
+  color: var(--ifm-color-emphasis-700);
+  margin-top: 0.3rem;
+}

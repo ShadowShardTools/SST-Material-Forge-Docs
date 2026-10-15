@@ -1,0 +1,54 @@
+---
+title: Splines
+sidebar_position: 12
+description: Drawing curves, carrying them between nodes, and drawing, filling, mapping and scattering along them.
+---
+
+The **Splines** nodes work with curves. A curve is drawn once — in **Spline Path**, **Spline Paths** or **Spline Circle** — and carried on a **pink** wire to every node that uses it, so a stroke, a fill and the copies along it all follow the same line, and moving the curve moves them all. A spline wire connects only to a spline input.
+
+**Drawing a curve.** Select a Spline Path and the 2D View puts the curve over the image with a handle on each point:
+
+- **drag a point** to move it,
+- **click the line** to add a point where you clicked, and keep dragging to place it,
+- **Alt-click a point** to take it away. Two points is the fewest a curve can have, so the last removal is refused,
+- **drag a point near another** and it lands exactly on it; hold <kbd>Shift</kbd> to put it on a grid of sixteenths instead,
+- **drop an end on the other end** to close the curve — and on Spline Paths, **drop an end on another path's end** to join the two into one path. Either is one step of undo.
+
+You need not go looking for the Spline Path: select the node it feeds — Spline Render, a Mapper, a Scatter, through any reroutes — and the 2D View shows that node's result with the curve drawing it laid over it, to edit right there. With **Tile 3×3** on, the curve is edited in the middle tile and its copies show faintly in the eight around it, so a curve meant to repeat is shaped where it meets itself.
+
+Pressing a point also picks it in Properties, where **Thickness** and **Height** set what the curve carries there: thickness scales the stroke, so a line can taper to nothing, and height is how high the curve stands in Spline Render's Height output. **Interpolation** decides how the curve passes its points:
+
+- **Smooth** runs through every one, and will not bulge out past a tight turn, so a corner stays a corner instead of looping.
+- **Bézier** runs through them too, steered by two handles on each point, shown in the 2D View. Drag one and the other turns with it to keep the curve smooth; hold <kbd>Alt</kbd> to break the pair for a corner.
+- **Quadratic** is pulled towards each point without reaching it — a softer curve that can never overshoot.
+- **Linear** joins the points with straight lines.
+
+**Drawing freehand.** Turn on **Draw** (the pen button above the 2D View) and draw a stroke over the image: when you let go it becomes a curve of a few points, ready to edit like any other. On a Spline Path it replaces the curve; on Spline Paths it adds a path, closed if you finish where you began. A pen tablet's pressure becomes each point's thickness, so pressing harder draws thicker. <kbd>Escape</kbd> abandons the stroke you are drawing, and each finished stroke is one step of undo.
+
+**Closed** joins the last point back to the first. **Spline Paths** holds several curves in one node, for cracks, veins or stalks drawn many at a time: click a faint one in the 2D View to work on it, and **New Path**, **Delete Path** and each path's **Closed** are in Properties. To work from vector art instead, use the **SVG** node's **Spline** output (see *Drawings*), which gives the drawing's shapes as curves. **Spline Circle** makes a circle, a regular polygon (**Sides**) or an arc.
+
+The nodes that draw with curves also have one of their own, used while nothing is wired to their Spline input, so a single stroke needs a single node.
+
+**Drawing with curves.**
+
+- **Spline Render** strokes the curves. **Width** sets the stroke and **Cap** rounds or squares off its ends. The **Height** output gives the stroke a profile — **Round** like a cable, **Linear** like a ridge, **Flat** like a plateau — scaled by each point's height, ready for Height to Normal. Turn on **Weave** and wherever strands cross they alternate over and under, the way a basket, a fabric or a lattice is woven: each strand rises to pass over and dips to pass under, by **Weave Depth**. Three more outputs say about each pixel which curve it belongs to and where: **ID** gives every curve a value of its own (change **Seed** for another set), **Along** runs from 0 to 1 along each curve, and **Distance** is a field 0.5 on the stroke's edge, reaching 1 inside it and 0 outside at **Distance Range** — for an outline, a glow or a bevel from one node.
+- **Spline Fill** fills them as shapes; an open curve is filled as though its ends were joined. **Even-odd** cuts a hole where one curve sits inside another.
+- **Spline Text** sets a string along each curve, turning each character to the curve where it sits — rather than setting the string straight and bending it, which stretches the glyphs on the outside of a turn. **Along** slides the string from one end to the other, **Across** lifts it off the line, and **Flip** reads the curve backwards for text that would otherwise be upside down.
+
+**Laying images along curves.**
+
+- **Spline Mapper** lays an image along the curves as a ribbon: its x runs along the curve and its y across it, so a strip of bricks follows a path and a rope winds round a loop. **Stretch** fits one copy to each curve; **Repeat** lays copies **Tile Length** × **Width** long, so a square image stays square. **Corners** set to **Mitre** turns the image round a corner as a picture frame's moulding does, squeezed on the inside and stretched on the outside; **Round** has each pixel take the nearest point of the curve, which fans the image round the outside of a corner. Wire images into **Start** and **End** for pieces of their own at the ends of an open curve, **Piece Length** × **Width** long — frayed ends on a rope, posts at the ends of a fence — and the middle repeats a whole number of times between them, so it meets both cleanly. Its **UV** output is where each pixel read its image — wire it into UV Transform to lay anything else the same way — and **Mask** is the ribbon.
+- **Spline Bridge** runs strands between curves, like rungs between two rails: **Between** from one curve to another, **Through** each curve of a list in turn, straight or **Smooth**. **Spline Bridge Mapper** stretches an image across those strands, so it fills the space between the curves and bends with both.
+- **Spline Flow** draws a flow map along the curves, in the encoding Warp's Vector mode reads: wire it into Warp to stream an image along a path, or choose **Outward** to push things off it.
+
+**Placing along curves.** **Spline Scatter** and **Spline Scatter Atlas** place copies of an image along each curve, exactly as the pair of grid scatters do. Copies are spaced by *distance* along the curve, so they stay evenly spaced through a bend; **Follow Curve** turns each to the way the curve heads — the difference between a line of arrows pointing along a path and a line of arrows all pointing north — and **Offset** slides them off it to one side. **Scatter Splines on Splines** places copies of whole curves instead — draw the shape around the middle of the image — and its result is a spline, to draw, fill or scatter along in turn.
+
+**Curves from images.** **Spline Trace** turns the outlines of a mask into closed curves — every edge where the mask crosses **Threshold**, holes included, wound the other way round so Spline Fill leaves them empty. Flood Fill cells become stone outlines to bevel; a painted crack becomes a curve to warp or wiggle. **Detail** is how finely the mask is read, and **Smallest** leaves out the specks of a noisy one. **Spline Text Outline** sets text as the Text node does and gives back the outline of every letter, counters and all, for engraved, outlined or bevelled lettering; it is placed in the 2D View like Text.
+
+**Curves that make themselves.** **Spline Growth** grows branching curves from seeds — cracks, roots, veins, lightning: **Trunks** start scattered or from one **Point**, heading **Direction** give or take **Spread**, wandering by **Jitter**; each sprouts **Branches** children down to **Depth** generations, at **Branch Angle** and **Branch Length** times as long, thinning towards the tips by **Taper**. The thickness is each point's height as well, so a crack is deepest along its trunk. **Spline Flow Lines** lets a map carry curves — wood grain, streaks, hair: lines start on a grid and walk the way the map points, read as a vector (as Warp and Spline Flow make it) or as an angle. Feed it a blurred noise for grain, or a Spline Flow for lines running alongside other curves.
+
+**Changing curves.** **Spline Transform** moves, turns and scales them; **Spline Warp** pushes their points by a map; **Spline Sample** sets their height or thickness from a map; **Spline Profile** sets them along each curve's length from two gradients, whose left end is the curve's start — a taper, a bulge, a ridge rising from one end to the other. **Spline Trim** cuts each curve down to the stretch between **Start** and **End** — raise End from 0 to 1 and a stroke draws itself along its path, the basis of a mask that grows. **Spline Offset** sets copies out to the side at the same distance all along, corners kept sharp: an inset, an outline, contour lines. **Spline Wiggle** gives a hand-drawn wobble measured along the curve, so it keeps its pace on any length. **Spline Resample** lays the vertices out evenly, **Spline Simplify** keeps only those a curve needs within **Tolerance**, and **Spline Hang** hangs a cable between a curve's points, each span sagging by **Slack** times its length. **Spline Append** lists the curves of up to four inputs together, **Spline Merge** joins them end to end into one, and **Spline Select** keeps some of them by their place in the list.
+
+A curve that runs off one edge comes back in at the other wherever **Tile** is on, so a spline tiles like everything else here. Curves are drawn at the resolution the pass renders at, so they are as crisp at 4096 as they look at 256, and each pixel looks only at the curves near it, so a dense field of them costs little more than a few.
+
+**Spline inputs.** A material can offer a curve as one of its settings: choose **Spline** in the Inputs panel, and the curve is drawn in a small square of its own — in Properties for its default, and in the Viewer for its setting — so a path can be reshaped without opening the graph. A subgraph's spline input and output are ports, so a subgraph can take a curve and give one back; while nothing is wired in, the input's own curve is used.
