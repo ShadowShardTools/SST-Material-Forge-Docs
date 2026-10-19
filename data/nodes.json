@@ -6766,14 +6766,20 @@
       "type": "scatter",
       "label": "Scatter",
       "category": "Patterns",
-      "description": "Places Pattern many times over the image, each copy with its own size, angle and shade. X and Y Amount set the grid it places them on, and Copies per Cell puts more than one in each — which is how the count passes X × Y and how a scatter is pushed until it covers everything. Scale sizes a copy against its cell, and Random Scale, Random Rotation, Random Position and Random Value vary each one from its own part of the seed, so turning one up leaves the others as they were. Density thins the copies out, and a Mask thins them where it is dark — read once per copy, so a copy is wholly there or wholly gone rather than half faded. Blend decides what overlapping copies do: Max joins them, which is what a height or a mask wants; Add accumulates; Over lets later copies cover earlier ones by their alpha. Tileable: a copy running off one edge is the same copy arriving at the other.",
+      "description": "Places Pattern many times over the image, each copy with its own size, angle and shade. Mode decides where they go: Grid lays X Amount by Y Amount of them, every other row moved along by Stagger (half gives brickwork), each Scale of its cell across; Random places Count copies Size across anywhere, spread evenly enough that none is far from the next but in no grid — pebbles, rivets, debris; Radial puts Count copies in a ring Radius from the middle, and Face Outward turns each to point away from it. Rotation turns every copy clockwise. Random Scale shrinks each copy by up to that share of its size, Random Rotation turns it up to that many degrees either way, Random Offset moves it up to that share of the way to its neighbour, and Random Value darkens it — each from its own part of the seed, so turning one up leaves the others as they were. Density thins the copies out, and a Mask thins them where it is dark, read once per copy so a copy is wholly there or wholly gone. Blend decides what overlapping copies do: Max joins them, which is what a height or a mask wants; Add accumulates; Over lets later copies cover earlier ones by their alpha. Tileable: a copy running off one edge is the same copy arriving at the other.",
       "tags": [
         "splatter",
         "stamp",
         "instance",
         "distribute",
         "random placement",
-        "grid of shapes"
+        "grid of shapes",
+        "radial",
+        "ring",
+        "circular",
+        "stagger",
+        "brick",
+        "pebbles"
       ],
       "inputs": [
         {
@@ -6793,6 +6799,12 @@
           "drives": "scale"
         },
         {
+          "id": "param:size",
+          "label": "Size",
+          "type": "grayscale",
+          "drives": "size"
+        },
+        {
           "id": "param:density",
           "label": "Density",
           "type": "grayscale",
@@ -6809,9 +6821,35 @@
       ],
       "parameters": [
         {
+          "id": "mode",
+          "label": "Mode",
+          "kind": "enum",
+          "default": "grid",
+          "options": [
+            {
+              "value": "grid",
+              "label": "Grid"
+            },
+            {
+              "value": "random",
+              "label": "Random"
+            },
+            {
+              "value": "radial",
+              "label": "Radial"
+            }
+          ]
+        },
+        {
           "id": "columns",
           "label": "X Amount",
           "kind": "int",
+          "visibleWhen": {
+            "parameter": "mode",
+            "values": [
+              "grid"
+            ]
+          },
           "default": 8,
           "min": 1,
           "max": 64
@@ -6820,25 +6858,107 @@
           "id": "rows",
           "label": "Y Amount",
           "kind": "int",
+          "visibleWhen": {
+            "parameter": "mode",
+            "values": [
+              "grid"
+            ]
+          },
           "default": 8,
           "min": 1,
           "max": 64
         },
         {
-          "id": "copies",
-          "label": "Copies per Cell",
-          "kind": "int",
-          "default": 1,
-          "min": 1,
-          "max": 8
+          "id": "stagger",
+          "label": "Stagger",
+          "kind": "float",
+          "visibleWhen": {
+            "parameter": "mode",
+            "values": [
+              "grid"
+            ]
+          },
+          "default": 0,
+          "min": 0,
+          "max": 1
         },
         {
           "id": "scale",
           "label": "Scale",
           "kind": "float",
+          "visibleWhen": {
+            "parameter": "mode",
+            "values": [
+              "grid"
+            ]
+          },
           "default": 0.8,
           "min": 0.05,
-          "max": 4
+          "max": 3
+        },
+        {
+          "id": "count",
+          "label": "Count",
+          "kind": "int",
+          "visibleWhen": {
+            "parameter": "mode",
+            "values": [
+              "random",
+              "radial"
+            ]
+          },
+          "default": 24,
+          "min": 1,
+          "max": 4096
+        },
+        {
+          "id": "size",
+          "label": "Size",
+          "kind": "float",
+          "visibleWhen": {
+            "parameter": "mode",
+            "values": [
+              "random",
+              "radial"
+            ]
+          },
+          "default": 0.15,
+          "min": 0.005,
+          "max": 2
+        },
+        {
+          "id": "radius",
+          "label": "Radius",
+          "kind": "float",
+          "visibleWhen": {
+            "parameter": "mode",
+            "values": [
+              "radial"
+            ]
+          },
+          "default": 0.3,
+          "min": 0,
+          "max": 0.5
+        },
+        {
+          "id": "faceOutward",
+          "label": "Face Outward",
+          "kind": "bool",
+          "visibleWhen": {
+            "parameter": "mode",
+            "values": [
+              "radial"
+            ]
+          },
+          "default": true
+        },
+        {
+          "id": "rotation",
+          "label": "Rotation",
+          "kind": "float",
+          "default": 0,
+          "min": -180,
+          "max": 180
         },
         {
           "id": "density",
@@ -6849,31 +6969,13 @@
           "max": 1
         },
         {
-          "id": "jitter",
-          "label": "Random Position",
-          "kind": "float",
-          "group": "Variation",
-          "default": 0,
-          "min": 0,
-          "max": 2
-        },
-        {
           "id": "scaleRandom",
           "label": "Random Scale",
           "kind": "float",
           "group": "Variation",
           "default": 0,
           "min": 0,
-          "max": 2
-        },
-        {
-          "id": "rotation",
-          "label": "Rotation",
-          "kind": "float",
-          "group": "Variation",
-          "default": 0,
-          "min": -180,
-          "max": 180
+          "max": 1
         },
         {
           "id": "rotationRandom",
@@ -6882,7 +6984,24 @@
           "group": "Variation",
           "default": 0,
           "min": 0,
-          "max": 360
+          "max": 180
+        },
+        {
+          "id": "offsetRandom",
+          "label": "Random Offset",
+          "kind": "float",
+          "group": "Variation",
+          "visibleWhen": {
+            "parameter": "mode",
+            "values": [
+              "grid",
+              "radial",
+              "even"
+            ]
+          },
+          "default": 0,
+          "min": 0,
+          "max": 1
         },
         {
           "id": "valueRandom",
@@ -6975,7 +7094,11 @@
         "splatter",
         "variations",
         "random shapes",
-        "multi shape scatter"
+        "multi shape scatter",
+        "grid",
+        "radial",
+        "ring",
+        "stagger"
       ],
       "inputs": [
         {
@@ -6995,6 +7118,12 @@
           "drives": "scale"
         },
         {
+          "id": "param:size",
+          "label": "Size",
+          "type": "grayscale",
+          "drives": "size"
+        },
+        {
           "id": "param:density",
           "label": "Density",
           "type": "grayscale",
@@ -7011,9 +7140,35 @@
       ],
       "parameters": [
         {
+          "id": "mode",
+          "label": "Mode",
+          "kind": "enum",
+          "default": "grid",
+          "options": [
+            {
+              "value": "grid",
+              "label": "Grid"
+            },
+            {
+              "value": "random",
+              "label": "Random"
+            },
+            {
+              "value": "radial",
+              "label": "Radial"
+            }
+          ]
+        },
+        {
           "id": "columns",
           "label": "X Amount",
           "kind": "int",
+          "visibleWhen": {
+            "parameter": "mode",
+            "values": [
+              "grid"
+            ]
+          },
           "default": 8,
           "min": 1,
           "max": 64
@@ -7022,25 +7177,107 @@
           "id": "rows",
           "label": "Y Amount",
           "kind": "int",
+          "visibleWhen": {
+            "parameter": "mode",
+            "values": [
+              "grid"
+            ]
+          },
           "default": 8,
           "min": 1,
           "max": 64
         },
         {
-          "id": "copies",
-          "label": "Copies per Cell",
-          "kind": "int",
-          "default": 1,
-          "min": 1,
-          "max": 8
+          "id": "stagger",
+          "label": "Stagger",
+          "kind": "float",
+          "visibleWhen": {
+            "parameter": "mode",
+            "values": [
+              "grid"
+            ]
+          },
+          "default": 0,
+          "min": 0,
+          "max": 1
         },
         {
           "id": "scale",
           "label": "Scale",
           "kind": "float",
+          "visibleWhen": {
+            "parameter": "mode",
+            "values": [
+              "grid"
+            ]
+          },
           "default": 0.8,
           "min": 0.05,
-          "max": 4
+          "max": 3
+        },
+        {
+          "id": "count",
+          "label": "Count",
+          "kind": "int",
+          "visibleWhen": {
+            "parameter": "mode",
+            "values": [
+              "random",
+              "radial"
+            ]
+          },
+          "default": 24,
+          "min": 1,
+          "max": 4096
+        },
+        {
+          "id": "size",
+          "label": "Size",
+          "kind": "float",
+          "visibleWhen": {
+            "parameter": "mode",
+            "values": [
+              "random",
+              "radial"
+            ]
+          },
+          "default": 0.15,
+          "min": 0.005,
+          "max": 2
+        },
+        {
+          "id": "radius",
+          "label": "Radius",
+          "kind": "float",
+          "visibleWhen": {
+            "parameter": "mode",
+            "values": [
+              "radial"
+            ]
+          },
+          "default": 0.3,
+          "min": 0,
+          "max": 0.5
+        },
+        {
+          "id": "faceOutward",
+          "label": "Face Outward",
+          "kind": "bool",
+          "visibleWhen": {
+            "parameter": "mode",
+            "values": [
+              "radial"
+            ]
+          },
+          "default": true
+        },
+        {
+          "id": "rotation",
+          "label": "Rotation",
+          "kind": "float",
+          "default": 0,
+          "min": -180,
+          "max": 180
         },
         {
           "id": "density",
@@ -7051,31 +7288,13 @@
           "max": 1
         },
         {
-          "id": "jitter",
-          "label": "Random Position",
-          "kind": "float",
-          "group": "Variation",
-          "default": 0,
-          "min": 0,
-          "max": 2
-        },
-        {
           "id": "scaleRandom",
           "label": "Random Scale",
           "kind": "float",
           "group": "Variation",
           "default": 0,
           "min": 0,
-          "max": 2
-        },
-        {
-          "id": "rotation",
-          "label": "Rotation",
-          "kind": "float",
-          "group": "Variation",
-          "default": 0,
-          "min": -180,
-          "max": 180
+          "max": 1
         },
         {
           "id": "rotationRandom",
@@ -7084,7 +7303,24 @@
           "group": "Variation",
           "default": 0,
           "min": 0,
-          "max": 360
+          "max": 180
+        },
+        {
+          "id": "offsetRandom",
+          "label": "Random Offset",
+          "kind": "float",
+          "group": "Variation",
+          "visibleWhen": {
+            "parameter": "mode",
+            "values": [
+              "grid",
+              "radial",
+              "even"
+            ]
+          },
+          "default": 0,
+          "min": 0,
+          "max": 1
         },
         {
           "id": "valueRandom",
@@ -8477,7 +8713,7 @@
       "type": "sdf2d-scatter",
       "label": "2D SDF Scatter",
       "category": "2D SDF",
-      "description": "Scatters copies of a signed distance field, each copy the whole input made smaller. Grid lays Columns by Rows of copies, each as large as the smaller side of its cell so it keeps its shape; Stagger moves every other row along by a share of a cell, half giving brickwork. Random Rotation, Random Scale and Random Offset vary each copy on its own, by Seed — scale only shrinks, so copies never crowd past their cells. Random places Count copies anywhere, each Copy Size across, spread evenly enough that none is far from the next but in no grid — pebbles, rivets, spots, debris. Radial puts Count copies in a ring Radius from the middle, each Copy Size of the image across, and Face Outward turns each to point away from the middle — petals, spokes, a clock face. Every copy is measured where it reaches, its neighbours’ included, so the field runs on unbroken from one cell to the next and can be offset, glowed or smoothly joined across them. ID gives every copy a value of its own, for a shade or a height per tile. Repeat before combining, so the copies can be joined, cut and rounded together.",
+      "description": "Scatters copies of a signed distance field, each copy the whole input made smaller, placed as Scatter places its copies — the same Seed gives the same copies in both. Grid lays X Amount by Y Amount of them, every other row moved along by Stagger (half gives brickwork), each Scale of its cell across, so at 1 neighbours touch; Random places Count copies Size across anywhere, spread evenly enough that none is far from the next but in no grid — pebbles, rivets, spots, debris; Radial puts Count copies in a ring Radius from the middle, and Face Outward turns each to point away from it — petals, spokes, a clock face. Rotation turns every copy clockwise; Random Scale shrinks each by up to that share of its size, Random Rotation turns it up to that many degrees either way and Random Offset moves it up to that share of the way to its neighbour. Density thins the copies out, and a Mask thins them where it is dark. Every copy is measured where it reaches, its neighbours’ included, so the field runs on unbroken from one copy to the next and can be offset, glowed or smoothly joined across them. ID gives every copy a value of its own, for a shade or a height per tile. Repeat before combining, so the copies can be joined, cut and rounded together.",
       "tags": [
         "signed distance",
         "repeat",
@@ -8501,6 +8737,11 @@
           "id": "in",
           "label": "2D SDF",
           "type": "sdf2d"
+        },
+        {
+          "id": "mask",
+          "label": "Mask",
+          "type": "grayscale"
         }
       ],
       "outputs": [
@@ -8538,7 +8779,7 @@
         },
         {
           "id": "columns",
-          "label": "Columns",
+          "label": "X Amount",
           "kind": "int",
           "visibleWhen": {
             "parameter": "mode",
@@ -8548,11 +8789,11 @@
           },
           "default": 4,
           "min": 1,
-          "max": 32
+          "max": 64
         },
         {
           "id": "rows",
-          "label": "Rows",
+          "label": "Y Amount",
           "kind": "int",
           "visibleWhen": {
             "parameter": "mode",
@@ -8562,7 +8803,7 @@
           },
           "default": 4,
           "min": 1,
-          "max": 32
+          "max": 64
         },
         {
           "id": "stagger",
@@ -8579,19 +8820,48 @@
           "max": 1
         },
         {
+          "id": "scale",
+          "label": "Scale",
+          "kind": "float",
+          "visibleWhen": {
+            "parameter": "mode",
+            "values": [
+              "grid"
+            ]
+          },
+          "default": 1,
+          "min": 0.05,
+          "max": 3
+        },
+        {
           "id": "count",
           "label": "Count",
           "kind": "int",
           "visibleWhen": {
             "parameter": "mode",
             "values": [
-              "radial",
-              "random"
+              "random",
+              "radial"
             ]
           },
-          "default": 6,
+          "default": 24,
           "min": 1,
-          "max": 1024
+          "max": 4096
+        },
+        {
+          "id": "size",
+          "label": "Size",
+          "kind": "float",
+          "visibleWhen": {
+            "parameter": "mode",
+            "values": [
+              "random",
+              "radial"
+            ]
+          },
+          "default": 0.15,
+          "min": 0.005,
+          "max": 2
         },
         {
           "id": "radius",
@@ -8608,65 +8878,6 @@
           "max": 0.5
         },
         {
-          "id": "copySize",
-          "label": "Copy Size",
-          "kind": "float",
-          "visibleWhen": {
-            "parameter": "mode",
-            "values": [
-              "radial",
-              "random"
-            ]
-          },
-          "default": 0.3,
-          "min": 0.01,
-          "max": 1
-        },
-        {
-          "id": "rotationRandom",
-          "label": "Random Rotation",
-          "kind": "float",
-          "visibleWhen": {
-            "parameter": "mode",
-            "values": [
-              "grid",
-              "random"
-            ]
-          },
-          "default": 0,
-          "min": 0,
-          "max": 180
-        },
-        {
-          "id": "scaleRandom",
-          "label": "Random Scale",
-          "kind": "float",
-          "visibleWhen": {
-            "parameter": "mode",
-            "values": [
-              "grid",
-              "random"
-            ]
-          },
-          "default": 0,
-          "min": 0,
-          "max": 1
-        },
-        {
-          "id": "offsetRandom",
-          "label": "Random Offset",
-          "kind": "float",
-          "visibleWhen": {
-            "parameter": "mode",
-            "values": [
-              "grid"
-            ]
-          },
-          "default": 0,
-          "min": 0,
-          "max": 0.5
-        },
-        {
           "id": "faceOutward",
           "label": "Face Outward",
           "kind": "bool",
@@ -8679,9 +8890,61 @@
           "default": true
         },
         {
+          "id": "rotation",
+          "label": "Rotation",
+          "kind": "float",
+          "default": 0,
+          "min": -180,
+          "max": 180
+        },
+        {
+          "id": "density",
+          "label": "Density",
+          "kind": "float",
+          "default": 1,
+          "min": 0,
+          "max": 1
+        },
+        {
+          "id": "scaleRandom",
+          "label": "Random Scale",
+          "kind": "float",
+          "group": "Variation",
+          "default": 0,
+          "min": 0,
+          "max": 1
+        },
+        {
+          "id": "rotationRandom",
+          "label": "Random Rotation",
+          "kind": "float",
+          "group": "Variation",
+          "default": 0,
+          "min": 0,
+          "max": 180
+        },
+        {
+          "id": "offsetRandom",
+          "label": "Random Offset",
+          "kind": "float",
+          "group": "Variation",
+          "visibleWhen": {
+            "parameter": "mode",
+            "values": [
+              "grid",
+              "radial",
+              "even"
+            ]
+          },
+          "default": 0,
+          "min": 0,
+          "max": 1
+        },
+        {
           "id": "seed",
           "label": "Seed",
           "kind": "int",
+          "group": "Variation",
           "default": 0,
           "min": 0,
           "max": 9999
@@ -10489,7 +10752,7 @@
       "type": "spline-randomize",
       "label": "Spline Randomize",
       "category": "Splines",
-      "description": "Varies every curve on its Spline input on its own, each by amounts of its own from Seed. Thickness Random and Height Random lower a whole curve’s thickness and height by up to that much of themselves — cracks of differing depth, planks of differing wear, strands of differing weight. Scale Random and Rotation Random scale and turn each curve about its middle by up to that much either way, and Offset Random moves it up to that far, so copies from Spline Array or Spline Instancer stop looking like copies.",
+      "description": "Varies every curve on its Spline input on its own, each by amounts of its own from Seed. Random Thickness and Random Height lower a whole curve’s thickness and height by up to that much of themselves — cracks of differing depth, planks of differing wear, strands of differing weight. Random Scale and Random Rotation scale and turn each curve about its middle by up to that much either way, and Random Offset moves it up to that far, so copies from Spline Array or Spline Instancer stop looking like copies.",
       "tags": [
         "random",
         "vary",
@@ -10514,7 +10777,7 @@
       "parameters": [
         {
           "id": "thicknessRandom",
-          "label": "Thickness Random",
+          "label": "Random Thickness",
           "kind": "float",
           "default": 0.5,
           "min": 0,
@@ -10522,7 +10785,7 @@
         },
         {
           "id": "heightRandom",
-          "label": "Height Random",
+          "label": "Random Height",
           "kind": "float",
           "default": 0.5,
           "min": 0,
@@ -10530,7 +10793,7 @@
         },
         {
           "id": "scaleRandom",
-          "label": "Scale Random",
+          "label": "Random Scale",
           "kind": "float",
           "default": 0,
           "min": 0,
@@ -10538,7 +10801,7 @@
         },
         {
           "id": "rotationRandom",
-          "label": "Rotation Random",
+          "label": "Random Rotation",
           "kind": "float",
           "default": 0,
           "min": 0,
@@ -10546,7 +10809,7 @@
         },
         {
           "id": "offsetRandom",
-          "label": "Offset Random",
+          "label": "Random Offset",
           "kind": "float",
           "default": 0,
           "min": 0,
@@ -12111,14 +12374,15 @@
       "type": "spline-instancer",
       "label": "Spline Instancer",
       "category": "Splines",
-      "description": "Places copies of the curves on Shape along the curves on Path: Count copies along each path curve, spaced evenly by distance. Draw the shape around the middle of the image — that is the point placed on the path. With several shape curves each copy takes one at random. Scale, Rotation and their Random amounts vary the copies, Follow Curve turns each to the way the path heads, Offset slides them off it to one side, and Scale Thickness scales each copy’s stroke with it. The copies are a spline, so they can be drawn, filled, warped or scattered along in turn.",
+      "description": "Places copies of the curves on Shape along the curves on Path, as Spline Scatter places images. Draw the shape around the middle of the image — that is the point placed on the path. With several shape curves each copy takes one at random. Mode decides where they go: Even spaces Count copies along each path curve by distance; Random puts Count copies anywhere along it. Size is how wide the whole image the shape was drawn in becomes at each copy. Follow Curve turns each to the way the path heads, Rotation turns them all clockwise, Offset slides them off it to one side, and Scale Thickness scales each copy’s stroke with it. Random Scale shrinks each copy by up to that share of its size, Random Rotation turns it up to that many degrees either way, and Random Offset moves it up to that share of the way to its neighbour along the path. Density thins the copies out, and a Mask thins them where it is dark. The copies are a spline, so they can be drawn, filled, warped or scattered along in turn.",
       "tags": [
-        "scatter splines on splines",
+        "scatter",
         "copies",
         "instances",
         "along",
         "repeat",
-        "shapes on a path"
+        "shapes on a path",
+        "curves on curves"
       ],
       "inputs": [
         {
@@ -12130,6 +12394,11 @@
           "id": "shape",
           "label": "Shape",
           "type": "spline"
+        },
+        {
+          "id": "mask",
+          "label": "Mask",
+          "type": "grayscale"
         }
       ],
       "outputs": [
@@ -12141,50 +12410,36 @@
       ],
       "parameters": [
         {
+          "id": "mode",
+          "label": "Mode",
+          "kind": "enum",
+          "default": "even",
+          "options": [
+            {
+              "value": "even",
+              "label": "Even"
+            },
+            {
+              "value": "random",
+              "label": "Random"
+            }
+          ]
+        },
+        {
           "id": "count",
           "label": "Count",
           "kind": "int",
           "default": 8,
           "min": 1,
-          "max": 64
+          "max": 1024
         },
         {
-          "id": "scale",
-          "label": "Scale",
+          "id": "size",
+          "label": "Size",
           "kind": "float",
           "default": 0.2,
           "min": 0.005,
           "max": 2
-        },
-        {
-          "id": "scaleRandom",
-          "label": "Scale Random",
-          "kind": "float",
-          "default": 0,
-          "min": 0,
-          "max": 1
-        },
-        {
-          "id": "rotation",
-          "label": "Rotation",
-          "kind": "float",
-          "default": 0,
-          "min": -180,
-          "max": 180
-        },
-        {
-          "id": "rotationRandom",
-          "label": "Rotation Random",
-          "kind": "float",
-          "default": 0,
-          "min": 0,
-          "max": 360
-        },
-        {
-          "id": "follow",
-          "label": "Follow Curve",
-          "kind": "bool",
-          "default": true
         },
         {
           "id": "offset",
@@ -12195,18 +12450,76 @@
           "max": 0.5
         },
         {
-          "id": "scaleThickness",
-          "label": "Scale Thickness",
+          "id": "follow",
+          "label": "Follow Curve",
           "kind": "bool",
-          "default": false
+          "default": true
+        },
+        {
+          "id": "rotation",
+          "label": "Rotation",
+          "kind": "float",
+          "default": 0,
+          "min": -180,
+          "max": 180
+        },
+        {
+          "id": "density",
+          "label": "Density",
+          "kind": "float",
+          "default": 1,
+          "min": 0,
+          "max": 1
+        },
+        {
+          "id": "scaleRandom",
+          "label": "Random Scale",
+          "kind": "float",
+          "group": "Variation",
+          "default": 0,
+          "min": 0,
+          "max": 1
+        },
+        {
+          "id": "rotationRandom",
+          "label": "Random Rotation",
+          "kind": "float",
+          "group": "Variation",
+          "default": 0,
+          "min": 0,
+          "max": 180
+        },
+        {
+          "id": "offsetRandom",
+          "label": "Random Offset",
+          "kind": "float",
+          "group": "Variation",
+          "visibleWhen": {
+            "parameter": "mode",
+            "values": [
+              "grid",
+              "radial",
+              "even"
+            ]
+          },
+          "default": 0,
+          "min": 0,
+          "max": 1
         },
         {
           "id": "seed",
           "label": "Seed",
           "kind": "int",
+          "group": "Variation",
           "default": 0,
           "min": 0,
           "max": 9999
+        },
+        {
+          "id": "scaleThickness",
+          "label": "Scale Thickness",
+          "kind": "bool",
+          "default": false
         }
       ]
     },
@@ -12556,14 +12869,15 @@
       "type": "spline-scatter",
       "label": "Spline Scatter",
       "category": "Splines",
-      "description": "Places copies of a shape along a curve — its own, or every curve on its Spline input — evenly spaced by distance so they stay even through a bend. Select it to drag its own curve in the 2D View. Count is copies along each curve, up to 16384 over every curve together. Follow Curve turns each copy to the direction the curve is heading there; Offset slides them off the curve, to one side or the other. Closed spreads them the whole way round a loop without doubling up at the join. Copies that run off an edge arrive at the other, so the result tiles.",
+      "description": "Places copies of a shape along a curve — its own, or every curve on its Spline input. Select it to drag its own curve in the 2D View. Mode decides where they go: Even spaces Count copies along each curve by distance, so they stay even through a bend, and Closed spreads them the whole way round a loop without doubling up at the join; Random puts Count copies anywhere along it. Up to 16384 over every curve together. Size is a copy’s width in image widths. Follow Curve turns each copy to the direction the curve is heading there, Rotation turns them all clockwise, and Offset slides them off the curve to one side or the other. Random Scale shrinks each copy by up to that share of its size, Random Rotation turns it up to that many degrees either way, Random Offset moves it up to that share of the way to its neighbour along the curve, and Random Value darkens it. Density thins the copies out, and a Mask thins them where it is dark. Blend decides what overlapping copies do, as on Scatter. Copies that run off an edge arrive at the other, so the result tiles.",
       "tags": [
         "curve",
         "path",
         "scatter",
         "along",
         "repeat",
-        "sleepers"
+        "sleepers",
+        "random along"
       ],
       "inputs": [
         {
@@ -12577,16 +12891,27 @@
           "type": "rgba"
         },
         {
-          "id": "param:scale",
-          "label": "Scale",
+          "id": "mask",
+          "label": "Mask",
+          "type": "grayscale"
+        },
+        {
+          "id": "param:size",
+          "label": "Size",
           "type": "grayscale",
-          "drives": "scale"
+          "drives": "size"
         },
         {
           "id": "param:offset",
           "label": "Offset",
           "type": "grayscale",
           "drives": "offset"
+        },
+        {
+          "id": "param:density",
+          "label": "Density",
+          "type": "grayscale",
+          "drives": "density"
         }
       ],
       "outputs": [
@@ -12634,6 +12959,22 @@
           ]
         },
         {
+          "id": "mode",
+          "label": "Mode",
+          "kind": "enum",
+          "default": "even",
+          "options": [
+            {
+              "value": "even",
+              "label": "Even"
+            },
+            {
+              "value": "random",
+              "label": "Random"
+            }
+          ]
+        },
+        {
           "id": "count",
           "label": "Count",
           "kind": "int",
@@ -12642,20 +12983,20 @@
           "max": 1024
         },
         {
-          "id": "scale",
-          "label": "Scale",
+          "id": "size",
+          "label": "Size",
           "kind": "float",
           "default": 0.14,
           "min": 0.005,
-          "max": 1
+          "max": 2
         },
         {
-          "id": "scaleRandom",
-          "label": "Scale Random",
+          "id": "offset",
+          "label": "Offset",
           "kind": "float",
           "default": 0,
-          "min": 0,
-          "max": 1
+          "min": -0.5,
+          "max": 0.5
         },
         {
           "id": "follow",
@@ -12672,25 +13013,53 @@
           "max": 180
         },
         {
-          "id": "rotationRandom",
-          "label": "Rotation Random",
+          "id": "density",
+          "label": "Density",
           "kind": "float",
-          "default": 0,
+          "default": 1,
           "min": 0,
-          "max": 360
+          "max": 1
         },
         {
-          "id": "offset",
-          "label": "Offset",
+          "id": "scaleRandom",
+          "label": "Random Scale",
           "kind": "float",
+          "group": "Variation",
           "default": 0,
-          "min": -0.5,
-          "max": 0.5
+          "min": 0,
+          "max": 1
+        },
+        {
+          "id": "rotationRandom",
+          "label": "Random Rotation",
+          "kind": "float",
+          "group": "Variation",
+          "default": 0,
+          "min": 0,
+          "max": 180
+        },
+        {
+          "id": "offsetRandom",
+          "label": "Random Offset",
+          "kind": "float",
+          "group": "Variation",
+          "visibleWhen": {
+            "parameter": "mode",
+            "values": [
+              "grid",
+              "radial",
+              "even"
+            ]
+          },
+          "default": 0,
+          "min": 0,
+          "max": 1
         },
         {
           "id": "valueRandom",
-          "label": "Value Random",
+          "label": "Random Value",
           "kind": "float",
+          "group": "Variation",
           "default": 0,
           "min": 0,
           "max": 1
@@ -12699,6 +13068,7 @@
           "id": "seed",
           "label": "Seed",
           "kind": "int",
+          "group": "Variation",
           "default": 0,
           "min": 0,
           "max": 9999
@@ -12792,16 +13162,27 @@
           "type": "rgba"
         },
         {
-          "id": "param:scale",
-          "label": "Scale",
+          "id": "mask",
+          "label": "Mask",
+          "type": "grayscale"
+        },
+        {
+          "id": "param:size",
+          "label": "Size",
           "type": "grayscale",
-          "drives": "scale"
+          "drives": "size"
         },
         {
           "id": "param:offset",
           "label": "Offset",
           "type": "grayscale",
           "drives": "offset"
+        },
+        {
+          "id": "param:density",
+          "label": "Density",
+          "type": "grayscale",
+          "drives": "density"
         }
       ],
       "outputs": [
@@ -12849,6 +13230,22 @@
           ]
         },
         {
+          "id": "mode",
+          "label": "Mode",
+          "kind": "enum",
+          "default": "even",
+          "options": [
+            {
+              "value": "even",
+              "label": "Even"
+            },
+            {
+              "value": "random",
+              "label": "Random"
+            }
+          ]
+        },
+        {
           "id": "count",
           "label": "Count",
           "kind": "int",
@@ -12857,20 +13254,20 @@
           "max": 1024
         },
         {
-          "id": "scale",
-          "label": "Scale",
+          "id": "size",
+          "label": "Size",
           "kind": "float",
           "default": 0.14,
           "min": 0.005,
-          "max": 1
+          "max": 2
         },
         {
-          "id": "scaleRandom",
-          "label": "Scale Random",
+          "id": "offset",
+          "label": "Offset",
           "kind": "float",
           "default": 0,
-          "min": 0,
-          "max": 1
+          "min": -0.5,
+          "max": 0.5
         },
         {
           "id": "follow",
@@ -12887,25 +13284,53 @@
           "max": 180
         },
         {
-          "id": "rotationRandom",
-          "label": "Rotation Random",
+          "id": "density",
+          "label": "Density",
           "kind": "float",
-          "default": 0,
+          "default": 1,
           "min": 0,
-          "max": 360
+          "max": 1
         },
         {
-          "id": "offset",
-          "label": "Offset",
+          "id": "scaleRandom",
+          "label": "Random Scale",
           "kind": "float",
+          "group": "Variation",
           "default": 0,
-          "min": -0.5,
-          "max": 0.5
+          "min": 0,
+          "max": 1
+        },
+        {
+          "id": "rotationRandom",
+          "label": "Random Rotation",
+          "kind": "float",
+          "group": "Variation",
+          "default": 0,
+          "min": 0,
+          "max": 180
+        },
+        {
+          "id": "offsetRandom",
+          "label": "Random Offset",
+          "kind": "float",
+          "group": "Variation",
+          "visibleWhen": {
+            "parameter": "mode",
+            "values": [
+              "grid",
+              "radial",
+              "even"
+            ]
+          },
+          "default": 0,
+          "min": 0,
+          "max": 1
         },
         {
           "id": "valueRandom",
-          "label": "Value Random",
+          "label": "Random Value",
           "kind": "float",
+          "group": "Variation",
           "default": 0,
           "min": 0,
           "max": 1
@@ -12914,6 +13339,7 @@
           "id": "seed",
           "label": "Seed",
           "kind": "int",
+          "group": "Variation",
           "default": 0,
           "min": 0,
           "max": 9999
