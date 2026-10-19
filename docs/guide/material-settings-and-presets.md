@@ -1,0 +1,24 @@
+---
+title: Material settings and presets
+sidebar_position: 5
+description: Inputs a material offers, and named presets of their values.
+---
+
+Inputs are the settings a material offers: a wear amount, a tint, a switch. They belong to the material rather than to any one node, so the same value can drive several nodes at once, and the Viewer can change it without opening the graph.
+
+1. In Forge, open the **Inputs** panel down the left of the graph. Press **+** and choose a type: Boolean, Float, Vector 2–4, or **Matrix 2x2**, **Matrix 3x3** and **Matrix 4x4**. A Float, a vector or a matrix has an **Int** checkbox that keeps it to whole numbers, and a Float in Int mode is an integer, on an integer port. Both offer **Spline**, a curve (see *Splines* below). A material also offers **Enum** (named choices — type them comma-separated under Options, and the graph reads the index chosen), **Color** (a picker and an alpha), **Texture** (one of the project's imported textures), **Text** (a string, on as many lines as you like), **SVG** (one of its imported drawings) and **Font** (an imported font or a generic family). A subgraph's inputs are ports, where the first three would only be a Float in Int mode or a Vector 4 by another name.
+2. Select the input to name it and set its **default** under Properties. A Float or vector input also has a **Mode**: **Regular** types its numbers, and **Slider** drags them over a range you set with **Min** and **Max** — which is also how they are set in the Viewer, so a slider says what values an input is meant to take. Choosing Slider widens its starting range to keep the value already set.
+3. Drag it onto the graph to read it. Drag it as many times as you like — every **Input** node reads the same input, so changing it changes them all. The **Text** and **SVG** nodes take inputs into their settings rather than as images: click the plug beside any of their settings — the words, the font, the drawing, the size, the offsets, the color — to show that setting's port, and wire an input to it. A **Text**, **Font** or **SVG** input sets the words, the face or the drawing; a number, a boolean, an enum or a color sets the setting of that kind, kept within the setting's own range. The setting then takes what the input is set to, and Properties shows *Set by the wired input* in its place. **Spline Text Outline** takes the same, and **Spline Text** its Text and Font.
+4. Arrange them by dragging one row onto the edge of another, or with <kbd>Alt</kbd> and the arrow keys. That order is the order the settings are listed in, and the order of the ports on a subgraph's node.
+
+Defaults are Forge's business and settings are the Viewer's, and the two halves are independent. Forge shows the material as it is built — every input at its default — whatever anyone has set in the Viewer; the Viewer shows it as it is set. Editing in Forge changes the default and nothing else: a preset the Viewer is showing neither moves nor goes out of date because the graph was edited, and choosing **Default** there is what brings the Viewer back to the values Forge holds. Exports match the half you start them from.
+
+In the **Viewer**, the material's inputs appear under **Settings**, below the presets — a number for each component, a checkbox for a boolean, a picker for a color, a box for text, a list of imported images, drawings or fonts for a texture, an SVG or a font — and the 3D View follows as you change them. An input has no range of its own, so its value is any number, positive or negative. A setting sits *over* the default rather than replacing it: the default stays what Forge says it is, and is what the material goes back to.
+
+**Presets**, above the settings, are named sets of those settings, chosen from a dropdown:
+
+- **Default** is always in the list. It is not stored with the others: it is the material with no settings at all, so choosing it puts every input back to its default.
+- **Save current settings as a preset** stores what the material shows now under a name, which you can type straight away.
+- A star after the name — **Worn\*** — means the settings have changed since that preset was chosen. Updating the preset keeps them and takes the star away; choosing another preset replaces them.
+- The three buttons beside the dropdown act on the chosen preset: the tick **updates** it with the current settings, the pencil **renames** it, and the bin **deletes** it. None of them apply to Default.
+- Presets and the current settings are saved with the project, so one material can carry several looks — rusted, painted, wet — without copying it. A preset changes settings only; the nodes are left as they are built.

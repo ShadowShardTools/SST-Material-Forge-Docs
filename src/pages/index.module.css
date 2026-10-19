@@ -1,0 +1,62 @@
+/* A deep teal in both themes, with white text, so the buttons on it read the
+   same in light and dark mode. Infima's hero--primary would turn light teal
+   with dark text in dark mode. */
+.heroBanner {
+  --ifm-hero-text-color: #fff;
+  background-color: #157f83;
+  color: #fff;
+  padding: 4rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme='dark'] .heroBanner {
+  background-color: #0f5d61;
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 2rem;
+  }
+}
+
+.heroLogo {
+  display: block;
+  margin: 0 auto 1rem;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Light text and border on the teal hero; the stock outline is dark on it.
+   Set through Infima's button variables, which its outline style reads. */
+.heroOutline {
+  --ifm-button-border-color: rgba(255, 255, 255, 0.85);
+  --ifm-button-color: #fff;
+}
+
+.heroOutline:hover {
+  --ifm-button-background-color: #fff;
+  --ifm-button-border-color: #fff;
+  color: var(--ifm-color-primary-darkest);
+}
+
+.version {
+  margin: 1.5rem 0 0;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.feature {
+  margin-bottom: 2rem;
+}
+
+.featureTitle {
+  font-size: 1.25rem;
+}
