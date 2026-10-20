@@ -4,6 +4,9 @@ sidebar_position: 20
 description: What to do when something goes wrong, finding your version, and what is recorded.
 ---
 
+- **"SST Material Forge needs WebGPU"** at startup — no graphics card the editor can use was found. The screen says what it found and what to try on your system; usually it is the graphics driver. On Linux, WebGPU needs a working Vulkan driver: `vulkaninfo --summary` should list your GPU. If the window itself comes up black on Linux, start the editor with `--no-vulkan` to rule out the driver's Vulkan support.
+- **"Your graphics card is not being used"** — the only GPU on offer is a software renderer, the processor imitating a graphics card. **Continue anyway** works, very slowly; fixing the driver is the real cure.
+- **"Your GPU is not drawing correctly"** — the editor draws a small test image when it starts, and it came back wrong. This is a driver fault; update the driver. If only compute shaders fail the test, the editor starts anyway, says so, and uses a slower way of drawing.
 - **"The GPU stopped responding"** — the graphics driver reset. Your work is saved; reload the editor and choose **Restore**.
 - **"Something went wrong"** — the editor hit an unexpected error. Your work is saved; reload and restore it. **Copy error details** copies information for a bug report.
 - **A node shows a red badge** — it could not be evaluated. Select it; the Properties panel shows the reason.
