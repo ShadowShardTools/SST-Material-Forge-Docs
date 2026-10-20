@@ -31,7 +31,7 @@ const FEATURES: Feature[] = [
     title: `${stats.nodes} nodes`,
     body: (
       <>
-        Noise, patterns, scatters and atlases, flood fill and distance fields, curves you draw yourself, and the
+        Noise, patterns, scatters and atlases, island masks and distance fields, curves you draw yourself, and the
         surface nodes that turn height into normals, curvature and occlusion.
       </>
     ),
@@ -41,7 +41,8 @@ const FEATURES: Feature[] = [
     title: 'Exports your engine reads',
     body: (
       <>
-        Bake maps at up to 8192 pixels, packed the way Unreal Engine, Unity URP and HDRP, Godot 4 and glTF expect —
+        Bake maps at up to 8192 pixels, for one preset or every preset at once, packed the way Unreal Engine, Unity URP
+        and HDRP, Godot 4 and glTF expect —
         or every map on its own, from 8-bit PNG to 32-bit OpenEXR.
       </>
     ),
