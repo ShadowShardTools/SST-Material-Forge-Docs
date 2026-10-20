@@ -8452,6 +8452,107 @@
       ]
     },
     {
+      "type": "sdf2d-blend",
+      "label": "2D SDF Blend",
+      "category": "2D SDF",
+      "description": "Melts two signed distance fields together the way metaballs do, each carrying a color or an image of its own — wire a texture into Color A and a different one into Color B, and where the shapes run into each other the textures do too. Falloff is how the shapes pull together: Exponential is soft; Classic metaball reaches further, drawing shapes together from further apart with fuller necks between them; Polynomial is tight, touching nothing more than half of Smoothness away. Smoothness is how far shapes reach to join; Color Blend is how wide the change from one color to the next is, from a hard line at 0 to a long soft fade. Color is the blended image, filling the whole frame, with the joined shape as its alpha; 2D SDF is the joined field, to go on through Modify, To Mask or another blend; Mask is the shape alone. Weight is B’s share of every pixel, from 0 where it is all A to 1 where it is all B: wire it into a Blend’s mask to mix a roughness, a height or a whole material along the same melt. For more than two shapes, chain blends, or melt many copies with 2D SDF Scatter. An unconnected field holds no shape and gives no color.",
+      "tags": [
+        "signed distance",
+        "metaball",
+        "blob",
+        "blend",
+        "melt",
+        "smooth union",
+        "color blend",
+        "texture blend",
+        "mix colors",
+        "liquid",
+        "goo"
+      ],
+      "inputs": [
+        {
+          "id": "a",
+          "label": "A",
+          "type": "sdf2d"
+        },
+        {
+          "id": "b",
+          "label": "B",
+          "type": "sdf2d"
+        },
+        {
+          "id": "colorA",
+          "label": "Color A",
+          "type": "rgba"
+        },
+        {
+          "id": "colorB",
+          "label": "Color B",
+          "type": "rgba"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "out",
+          "label": "Color",
+          "type": "rgba"
+        },
+        {
+          "id": "sdf",
+          "label": "2D SDF",
+          "type": "sdf2d"
+        },
+        {
+          "id": "mask",
+          "label": "Mask",
+          "type": "grayscale"
+        },
+        {
+          "id": "weight",
+          "label": "Weight",
+          "type": "grayscale"
+        }
+      ],
+      "parameters": [
+        {
+          "id": "falloff",
+          "label": "Falloff",
+          "kind": "enum",
+          "default": "exponential",
+          "options": [
+            {
+              "value": "exponential",
+              "label": "Exponential"
+            },
+            {
+              "value": "classic",
+              "label": "Classic metaball"
+            },
+            {
+              "value": "polynomial",
+              "label": "Polynomial"
+            }
+          ]
+        },
+        {
+          "id": "smoothness",
+          "label": "Smoothness",
+          "kind": "float",
+          "default": 0.1,
+          "min": 0,
+          "max": 0.5
+        },
+        {
+          "id": "colorBlend",
+          "label": "Color Blend",
+          "kind": "float",
+          "default": 0.05,
+          "min": 0,
+          "max": 0.5
+        }
+      ]
+    },
+    {
       "type": "sdf2d-modify",
       "label": "2D SDF Modify",
       "category": "2D SDF",
@@ -8713,7 +8814,7 @@
       "type": "sdf2d-scatter",
       "label": "2D SDF Scatter",
       "category": "2D SDF",
-      "description": "Scatters copies of a signed distance field, each copy the whole input made smaller, placed as Scatter places its copies — the same Seed gives the same copies in both. Grid lays X Amount by Y Amount of them, every other row moved along by Stagger (half gives brickwork), each Scale of its cell across, so at 1 neighbours touch; Random places Count copies Size across anywhere, spread evenly enough that none is far from the next but in no grid — pebbles, rivets, spots, debris; Radial puts Count copies in a ring Radius from the middle, and Face Outward turns each to point away from it — petals, spokes, a clock face. Rotation turns every copy clockwise; Random Scale shrinks each by up to that share of its size, Random Rotation turns it up to that many degrees either way and Random Offset moves it up to that share of the way to its neighbour. Density thins the copies out, and a Mask thins them where it is dark. Every copy is measured where it reaches, its neighbours’ included, so the field runs on unbroken from one copy to the next and can be offset, glowed or smoothly joined across them. ID gives every copy a value of its own, for a shade or a height per tile. Repeat before combining, so the copies can be joined, cut and rounded together.",
+      "description": "Scatters copies of a signed distance field, each copy the whole input made smaller, placed as Scatter places its copies — the same Seed gives the same copies in both. Grid lays X Amount by Y Amount of them, every other row moved along by Stagger (half gives brickwork), each Scale of its cell across, so at 1 neighbours touch; Random places Count copies Size across anywhere, spread evenly enough that none is far from the next but in no grid — pebbles, rivets, spots, debris; Radial puts Count copies in a ring Radius from the middle, and Face Outward turns each to point away from it — petals, spokes, a clock face. Rotation turns every copy clockwise; Random Scale shrinks each by up to that share of its size, Random Rotation turns it up to that many degrees either way and Random Offset moves it up to that share of the way to its neighbour. Density thins the copies out, and a Mask thins them where it is dark. Every copy is measured where it reaches, its neighbours’ included, so the field runs on unbroken from one copy to the next and can be offset, glowed or smoothly joined across them. Join decides how copies meet: Separate keeps each its own shape; Melt runs them into one another like metaballs, Smoothness wide, as 2D SDF Blend does, with the same Falloff choices: Exponential, soft; Classic metaball, reaching furthest with the fullest necks; Polynomial, tight. Color gives each copy a color of its own and blends them as the shapes do, over Color Blend when melting: Color From takes the Color image under each copy’s centre — a gradient or a noise gives every blob its own tint — or lays the image onto each copy, a random cell of it per copy when Atlas Columns, Rows and Count say it is an atlas. Its alpha is the shape. ID gives every copy a value of its own, for a shade or a height per tile. Repeat before combining, so the copies can be joined, cut and rounded together.",
       "tags": [
         "signed distance",
         "repeat",
@@ -8730,7 +8831,11 @@
         "ring",
         "polar",
         "copies",
-        "clone"
+        "clone",
+        "metaball",
+        "melt",
+        "blobs",
+        "goo"
       ],
       "inputs": [
         {
@@ -8742,6 +8847,11 @@
           "id": "mask",
           "label": "Mask",
           "type": "grayscale"
+        },
+        {
+          "id": "color",
+          "label": "Color",
+          "type": "rgba"
         }
       ],
       "outputs": [
@@ -8754,6 +8864,11 @@
           "id": "id",
           "label": "ID",
           "type": "grayscale"
+        },
+        {
+          "id": "colorOut",
+          "label": "Color",
+          "type": "rgba"
         }
       ],
       "parameters": [
@@ -8948,6 +9063,137 @@
           "default": 0,
           "min": 0,
           "max": 9999
+        },
+        {
+          "id": "join",
+          "label": "Join",
+          "kind": "enum",
+          "default": "separate",
+          "options": [
+            {
+              "value": "separate",
+              "label": "Separate"
+            },
+            {
+              "value": "melt",
+              "label": "Melt"
+            }
+          ]
+        },
+        {
+          "id": "falloff",
+          "label": "Falloff",
+          "kind": "enum",
+          "visibleWhen": {
+            "parameter": "join",
+            "values": [
+              "melt"
+            ]
+          },
+          "default": "exponential",
+          "options": [
+            {
+              "value": "exponential",
+              "label": "Exponential"
+            },
+            {
+              "value": "classic",
+              "label": "Classic metaball"
+            },
+            {
+              "value": "polynomial",
+              "label": "Polynomial"
+            }
+          ]
+        },
+        {
+          "id": "smoothness",
+          "label": "Smoothness",
+          "kind": "float",
+          "visibleWhen": {
+            "parameter": "join",
+            "values": [
+              "melt"
+            ]
+          },
+          "default": 0.05,
+          "min": 0,
+          "max": 0.5
+        },
+        {
+          "id": "colorBlend",
+          "label": "Color Blend",
+          "kind": "float",
+          "visibleWhen": {
+            "parameter": "join",
+            "values": [
+              "melt"
+            ]
+          },
+          "default": 0.03,
+          "min": 0,
+          "max": 0.5
+        },
+        {
+          "id": "colorFrom",
+          "label": "Color From",
+          "kind": "enum",
+          "default": "under",
+          "options": [
+            {
+              "value": "under",
+              "label": "Image under each copy"
+            },
+            {
+              "value": "mapped",
+              "label": "Image on each copy"
+            }
+          ]
+        },
+        {
+          "id": "atlasColumns",
+          "label": "Atlas Columns",
+          "kind": "int",
+          "group": "Atlas",
+          "visibleWhen": {
+            "parameter": "colorFrom",
+            "values": [
+              "mapped"
+            ]
+          },
+          "default": 1,
+          "min": 1,
+          "max": 8
+        },
+        {
+          "id": "atlasRows",
+          "label": "Atlas Rows",
+          "kind": "int",
+          "group": "Atlas",
+          "visibleWhen": {
+            "parameter": "colorFrom",
+            "values": [
+              "mapped"
+            ]
+          },
+          "default": 1,
+          "min": 1,
+          "max": 8
+        },
+        {
+          "id": "atlasCount",
+          "label": "Atlas Count",
+          "kind": "int",
+          "group": "Atlas",
+          "visibleWhen": {
+            "parameter": "colorFrom",
+            "values": [
+              "mapped"
+            ]
+          },
+          "default": 1,
+          "min": 1,
+          "max": 8
         }
       ]
     },
