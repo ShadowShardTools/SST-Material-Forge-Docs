@@ -4131,7 +4131,7 @@
       "type": "warp",
       "label": "Warp",
       "category": "Transform",
-      "description": "Moves the input’s content, with Map saying how far, in image widths times Intensity. Directional pushes everything towards Angle (clockwise from pointing right); Gradient pushes it down the map’s slopes, away from its bright parts, as if they were raised and the image slid off them — Radius is how broad a slope it feels, and Intensity 1 moves a pixel on a slope rising 1 over a tenth of the image by a tenth of the image; Vector pushes along the Vector input, red right and green down with 0.5 standing still, as Spline Direction Field draws it, so an image streams along a path; Radial pushes out from Centre, further the further out a pixel already is, fading to nothing half a tile away so the result still tiles; Churn warps several ways at once and brings the results back together, which churns a surface instead of smearing it one way. Steps walks a strong warp in that many small steps, each turning with the field, so it flows round shapes instead of folding over itself.",
+      "description": "Moves the input’s content, with Map saying how far, in image widths times Intensity. Directional pushes everything towards Angle (clockwise from pointing right); Gradient pushes it down the map’s slopes, away from its bright parts, as if they were raised and the image slid off them — Radius is how broad a slope it feels, and Intensity 1 moves a pixel on a slope rising 1 over a tenth of the image by a tenth of the image; Vector pushes along the Vector input, red right and green down with 0.5 standing still, as Spline Direction Field draws it, so an image streams along a path; Radial pushes out from Centre, further the further out a pixel already is, fading to nothing half a tile away so the result still tiles; Churn smears several ways at once, evenly around the circle from Angle, and brings everything it passed back together — averaged, which churns a surface instead of smearing it one way, or the darkest or lightest of it, which eats into shapes or grows them along the map, for chipped and worn edges. Steps walks a strong warp in that many small steps, each turning with the field, so it flows round shapes instead of folding over itself. Path decides what a stepped warp gives back: End is where the walk finishes, the warp itself; Average blends everything it passed, streaking the image along the flow; Darkest and Lightest keep the darkest or lightest of it, which with Gradient wears edges away down the map’s slopes or builds them up — chipped paint, eroded stone, dripping grime. The more Steps, the smoother the streak.",
       "tags": [
         "distort",
         "displace",
@@ -4325,6 +4325,39 @@
           "default": 1,
           "min": 1,
           "max": 32
+        },
+        {
+          "id": "path",
+          "label": "Path",
+          "kind": "enum",
+          "visibleWhen": {
+            "parameter": "mode",
+            "values": [
+              "directional",
+              "gradient",
+              "vector",
+              "radial"
+            ]
+          },
+          "default": "end",
+          "options": [
+            {
+              "value": "end",
+              "label": "End"
+            },
+            {
+              "value": "average",
+              "label": "Average"
+            },
+            {
+              "value": "min",
+              "label": "Darkest"
+            },
+            {
+              "value": "max",
+              "label": "Lightest"
+            }
+          ]
         },
         {
           "id": "sampling",
