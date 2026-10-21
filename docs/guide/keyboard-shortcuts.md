@@ -18,3 +18,5 @@ Press <kbd>?</kbd> in the editor, or open **Help → Keyboard Shortcuts**, for t
 | <kbd>F</kbd> | Frame the whole graph |
 | <kbd>F10</kbd> | Go to the menu bar |
 | <kbd>F1</kbd> | Open the user guide |
+| <kbd>Delete</kbd> on a focused tab / middle-click a tab | Close the panel |
+| Arrow keys on a focused panel divider | Move it; <kbd>Shift</kbd> moves it further |
