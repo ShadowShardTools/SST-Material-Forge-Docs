@@ -1,6 +1,6 @@
 ---
 title: Saving and exporting
-sidebar_position: 19
+sidebar_position: 20
 description: Project and package files, and baking maps for game engines and other tools.
 ---
 
@@ -17,6 +17,7 @@ Both are containers: the document and the files it uses, packed together. Import
 - **Open Project** (<kbd>Ctrl</kbd>+<kbd>O</kbd>) loads one, replacing what is open.
 - **Save Project** (<kbd>Ctrl</kbd>+<kbd>S</kbd>) writes the project back to its own file — the one it was opened from or last saved to — without asking. A project not saved yet asks where, and is named after its first package.
 - **Save Project As…** (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd>) saves to a new file, which from then on is the project's own.
+- **The start screen** is where SST Material Forge begins, before the editor: **New Project**, **Open Project…**, **Settings** and, in the desktop application, **Exit** down the left, and your recent projects on the right, each with the picture of its 3D view it was last saved or opened with — click one to open it. The editor opens once a project is chosen. **File → Start Screen…** goes back to it; a project with unsaved changes asks first when you start or open another.
 - **Open Recent** lists the last ten projects you opened or saved, newest first, with the folder each is in; choose one to open it, or **Clear Recent** to empty the list. A project that has since been moved or deleted drops off it. The list is the desktop application's: a browser never learns where a file was.
 - New Project, Open Project and closing the window all ask first when the project has changes since it was last opened or saved: **Save**, **Don't Save**, or **Cancel** to keep working. In a browser, leaving the page with unsaved changes brings up the browser's own warning instead.
 - In a browser rather than the desktop application, every save downloads the file, so Save Project always gives you a new copy.

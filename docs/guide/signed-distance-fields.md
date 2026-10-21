@@ -1,6 +1,6 @@
 ---
 title: 2D signed distance fields
-sidebar_position: 17
+sidebar_position: 18
 description: Building shapes as signed distances — joining them smoothly, reshaping and repeating them — and drawing them as fills, strokes, bevels and glows.
 ---
 

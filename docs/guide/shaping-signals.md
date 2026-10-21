@@ -1,6 +1,6 @@
 ---
 title: Shaping signals and edges
-sidebar_position: 18
+sidebar_position: 19
 description: Easing curves, bevels, sharpening, embossing, edge detection, swirl, posterization and color replacement.
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Keyboard shortcuts
-sidebar_position: 22
+sidebar_position: 23
 description: The default keyboard and mouse bindings.
 ---
 

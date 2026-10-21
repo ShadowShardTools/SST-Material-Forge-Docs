@@ -13,7 +13,7 @@ When no node does what you need, write one. A custom node is a short piece of co
 While the code does not compile, its nodes keep running the last version that did, so a graph does not go black in the middle of a word. A node whose code has never compiled shows its first error instead of an image.
 
 - **Import Nodes…** (right-click **Functions**) adds `.sstmfsl` files to the package; **Export Node…** (right-click the node) writes one. A file that does not compile is imported all the same, to be fixed in the editor.
-- **Save to My Library** keeps a node outside any project. Library nodes are offered in every project, under **Custom › My Library**; using one copies it into the project, so a project always carries the nodes it uses and opens the same on another computer. On the desktop the library is a folder of `.sstmfsl` files in your Documents, under SST Material Forge › Nodes — **Open My Library Folder** shows it — and files put there by hand are offered too.
+- **Save to Asset Library** keeps a node in your [asset library](./asset-library.md). Its nodes, in whatever folder, are offered in every project under **Custom › My Library**; using one copies it into the project, so a project always carries the nodes it uses and opens the same on another computer.
 - A node's code is saved with the project. The Code panel keeps its own undo while you type; deleting a node's code from the Explorer leaves the nodes using it in place, saying their code is gone, until you undo.
 
 ## Declaring a node

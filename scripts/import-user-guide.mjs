@@ -68,6 +68,8 @@ const PAGES = [
     [section('Organising a graph')]],
   ['images-and-resources', 'Images and resources', 'Importing textures, environment maps, drawings and fonts into a project.',
     [section('Images'), section('Environment maps and fonts', 'Environment maps, drawings and fonts')]],
+  ['asset-library', 'The asset library', 'Packages, textures, HDRIs, SVGs, fonts and custom nodes kept between projects, in folders of your own, and used in any of them.',
+    [section('The asset library')]],
   ['coordinates-and-sampling', 'Coordinates and sampling', 'Bending texture coordinates with UV and UV Transform, and what happens past the edge of an image.',
     [section('Working in coordinates')]],
   ['placing-by-hand', 'Placing things by hand', 'The 2D View frame for UV Transform, Normal UV Transform, Text, SVG and Crop.',
@@ -105,6 +107,7 @@ const LINKS = {
       'Select the node to place it by hand in the 2D View — see [Placing things by hand](./placing-by-hand.md).'],
   ],
   'keyboard-shortcuts': [['| Open this guide |', '| Open the user guide |']],
+  'custom-nodes': [['keeps a node in your asset library (see The asset library).', 'keeps a node in your [asset library](./asset-library.md).']],
 };
 
 await rm(outDir, {recursive: true, force: true});
