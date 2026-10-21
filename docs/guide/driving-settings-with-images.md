@@ -1,6 +1,6 @@
 ---
 title: Driving settings with images
-sidebar_position: 7
+sidebar_position: 8
 description: Letting a setting vary across the texture by connecting a map to it.
 ---
 

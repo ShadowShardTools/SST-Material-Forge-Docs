@@ -1,6 +1,6 @@
 ---
 title: Splines
-sidebar_position: 12
+sidebar_position: 13
 description: Drawing curves, carrying them between nodes, and drawing, filling, mapping and scattering along them.
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Shapes and patterns
-sidebar_position: 14
+sidebar_position: 15
 description: The Shape node and its shapes, outlines, rounding and stretch; Checkerboard and Grid.
 ---
 

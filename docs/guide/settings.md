@@ -1,6 +1,6 @@
 ---
 title: Settings
-sidebar_position: 19
+sidebar_position: 20
 description: Editor, appearance, shortcuts, backup and privacy settings.
 ---
 

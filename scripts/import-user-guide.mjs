@@ -60,6 +60,8 @@ const PAGES = [
     [section('Material settings and presets')]],
   ['subgraphs', 'Reusing work with subgraphs', 'Packaging part of a graph as a node of its own, and using one material inside another.',
     [section('Reusing work with subgraphs')]],
+  ['custom-nodes', 'Writing your own nodes', 'Custom nodes written in code — making, importing and sharing them, how one declares its inputs, controls and passes, and the language they are written in.',
+    [section('Writing your own nodes'), section('Declaring a node', 'Declaring a node'), section('Passes', 'Passes'), section('The language', 'The language')]],
   ['driving-settings-with-images', 'Driving settings with images', 'Letting a setting vary across the texture by connecting a map to it.',
     [section('Driving settings with images')]],
   ['organising-a-graph', 'Organising a graph', 'Groups, comments, reroutes, copy and paste, alignment and wire styles.',

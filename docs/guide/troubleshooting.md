@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-sidebar_position: 20
+sidebar_position: 21
 description: What to do when something goes wrong, finding your version, and what is recorded.
 ---
 

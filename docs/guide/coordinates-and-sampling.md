@@ -1,6 +1,6 @@
 ---
 title: Coordinates and sampling
-sidebar_position: 10
+sidebar_position: 11
 description: Bending texture coordinates with UV and UV Transform, and what happens past the edge of an image.
 ---
 

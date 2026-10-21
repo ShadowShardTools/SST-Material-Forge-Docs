@@ -1,6 +1,6 @@
 ---
 title: Placing things by hand
-sidebar_position: 11
+sidebar_position: 12
 description: The 2D View frame for UV Transform, Normal UV Transform, Text, SVG and Crop.
 ---
 

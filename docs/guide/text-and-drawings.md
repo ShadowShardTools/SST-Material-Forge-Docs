@@ -1,6 +1,6 @@
 ---
 title: Text and drawings
-sidebar_position: 13
+sidebar_position: 14
 description: Setting type with the Text node and drawing imported SVGs.
 ---
 

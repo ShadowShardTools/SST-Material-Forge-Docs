@@ -1,6 +1,6 @@
 ---
 title: Organising a graph
-sidebar_position: 8
+sidebar_position: 9
 description: Groups, comments, reroutes, copy and paste, alignment and wire styles.
 ---
 

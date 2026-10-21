@@ -1,6 +1,6 @@
 ---
 title: Images and resources
-sidebar_position: 9
+sidebar_position: 10
 description: Importing textures, environment maps, drawings and fonts into a project.
 ---
 

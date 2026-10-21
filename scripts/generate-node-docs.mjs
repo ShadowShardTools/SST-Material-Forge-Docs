@@ -35,6 +35,7 @@ const BLURBS = {
   Math: 'Arithmetic, ranges, rounding, interpolation, trigonometry, vectors and matrices on whole images, under sub-headings.',
   Conditional: 'Choosing between inputs, per pixel.',
   SubGraphs: 'Your own subgraphs, used as nodes.',
+  Custom: 'Nodes of your own, written in code.',
   Material: 'The Output node and the package\'s materials used as nodes.',
 };
 
@@ -42,6 +43,8 @@ const BLURBS = {
 const PROSE_ONLY = {
   SubGraphs:
     'This heading lists the subgraphs in your project, so what it holds is yours. See [Reusing work with subgraphs](../guide/subgraphs.md) for how to make one and declare its inputs and outputs.',
+  Custom:
+    'This heading lists the nodes your project defines in code, and those kept in your library under **My Library**, so what it holds is yours. See [Writing your own nodes](../guide/custom-nodes.md) for how to write one and the language they are written in.',
   Material:
     'Every material ends in one **Output** node, which is part of the material rather than something added from the menu. This heading also lists the package\'s other materials, so one material can be built on another. See [Building a material](../guide/building-a-material.md).',
 };

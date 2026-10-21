@@ -1,6 +1,6 @@
 ---
 title: Masks and layering
-sidebar_position: 15
+sidebar_position: 16
 description: Distance fields, polar transforms, blending by height, and the masks a height or normal map gives.
 ---
 
