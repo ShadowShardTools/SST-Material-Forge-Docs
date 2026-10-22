@@ -18316,7 +18316,7 @@
       "type": "switch",
       "label": "Switch",
       "category": "Conditional",
-      "description": "Outputs input floor(Which) + 1, clamped to In 1–In 10. Unconnected inputs are zero.",
+      "description": "Outputs input floor(Which) + 1, clamped to the inputs it has. Inputs sets how many it has, from 2 to 10. Unconnected inputs are zero.",
       "tags": [
         "select",
         "choose",
@@ -18389,6 +18389,14 @@
         }
       ],
       "parameters": [
+        {
+          "id": "inputs",
+          "label": "Inputs",
+          "kind": "int",
+          "default": 2,
+          "min": 2,
+          "max": 10
+        },
         {
           "id": "which",
           "label": "Which",

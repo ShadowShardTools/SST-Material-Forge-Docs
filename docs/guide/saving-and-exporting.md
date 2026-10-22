@@ -13,7 +13,7 @@ The editor writes two kinds of file, and both are JSON:
 
 Both are containers: the document and the files it uses, packed together. Imported images, environment maps and fonts go in as the files you chose, byte for byte, so nothing is re-encoded and nothing grows a third in size the way an embedded copy does. A file used by two materials — or by two packages — is stored once. On the desktop, saving writes to a temporary name and renames it into place, so an interrupted save cannot destroy the file it was replacing.
 
-- **New Project** (<kbd>Ctrl</kbd>+<kbd>N</kbd>) closes the project and starts a new one with the starter package.
+- **New Project** (<kbd>Ctrl</kbd>+<kbd>N</kbd>) closes the project and starts a new one: a package with one blank material, open in the graph.
 - **Open Project** (<kbd>Ctrl</kbd>+<kbd>O</kbd>) loads one, replacing what is open.
 - **Save Project** (<kbd>Ctrl</kbd>+<kbd>S</kbd>) writes the project back to its own file — the one it was opened from or last saved to — without asking. A project not saved yet asks where, and is named after its first package.
 - **Save Project As…** (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd>) saves to a new file, which from then on is the project's own.
