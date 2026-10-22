@@ -4,7 +4,7 @@ sidebar_position: 3
 description: Adding and connecting nodes, adjusting settings, and the Output node that ends every material.
 ---
 
-1. **Add nodes.** Right-click empty space in the graph (or press <kbd>Space</kbd>) to open the node menu. Type to search by name or by what you need (for example “voronoi”, “albedo” or “glitter”), or open a category and pick a node. The node is placed where you clicked.
+1. **Add nodes.** Right-click empty space in the graph (or press <kbd>Space</kbd>) to open the node menu. Type to search by name or by what you need (for example “voronoi”, “albedo” or “glitter”), or open a category and pick a node. The node is placed where you clicked. To browse instead, open **Window → Nodes**: every node of the menu, by category, as tiles or a list — drag one onto the graph to place it there, or double-click it to add it in the middle of the view.
 2. **Connect them.** Drag from an output port on the right of a node to an input port on the left of another. Let go over empty canvas instead and the node menu opens there: pick something and it arrives already wired to the port you pulled from — pulling from an input asks for something to feed it, and from an output for something to feed. Drag from a connected input to move or remove its wire, or <kbd>Alt</kbd>-click a wire to disconnect it.
 3. **Adjust settings.** Select a node to see its settings under Properties. Drag a slider, type an exact value, or focus a slider and use the arrow keys.
 

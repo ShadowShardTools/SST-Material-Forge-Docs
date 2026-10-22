@@ -6,14 +6,14 @@ description: Custom nodes written in code — making, importing and sharing them
 
 When no node does what you need, write one. A custom node is a short piece of code in a language close to HLSL: it says what the node takes, what controls it shows and how each pixel of its output is worked out. It runs on the GPU like every other node, and its file is plain text with the extension `.sstmfsl`.
 
-1. Right-click **Functions** in the Explorer and choose **Create Node**. A **Code** panel opens beside the graph with a small working node in it: one input, two controls, one output.
+1. Right-click **Functions** in the Explorer and choose **Create Node**: a small working node — one input, two controls, one output. Double-click it, or right-click it and choose **Edit Source**, to open its code in a **Code** panel beside the graph. **Window → Code** opens a Code panel that shows whichever node is selected in the Explorer.
 2. Edit the code. Each pause in typing compiles it again, and every graph using the node updates. The line under the code says how it went: **Compiled**, with the number of passes and outputs, or the errors, each with its line and column — click one to go there. Problems are also underlined in the code, with a marker beside the line.
 3. Use the node like any other: pick it in the node menu under **Custom**, or drag it from the Explorer onto the canvas. Its inputs, outputs and controls are the ones the code declares, and change when the code does.
 
 While the code does not compile, its nodes keep running the last version that did, so a graph does not go black in the middle of a word. A node whose code has never compiled shows its first error instead of an image.
 
 - **Import Nodes…** (right-click **Functions**) adds `.sstmfsl` files to the package; **Export Node…** (right-click the node) writes one. A file that does not compile is imported all the same, to be fixed in the editor.
-- **Save to Asset Library** keeps a node in your [asset library](./asset-library.md). Its nodes, in whatever folder, are offered in every project under **Custom › My Library**; using one copies it into the project, so a project always carries the nodes it uses and opens the same on another computer.
+- **Save to Asset Library** keeps a node in your [asset library](./asset-library.md). Its nodes, in whatever folder, are offered in every project under **Custom › My Library**, and those SST Material Forge comes with under **Custom › Built-in**; using one copies it into the project, so a project always carries the nodes it uses and opens the same on another computer.
 - A node's code is saved with the project. The Code panel keeps its own undo while you type; deleting a node's code from the Explorer leaves the nodes using it in place, saying their code is gone, until you undo.
 
 ## Declaring a node
