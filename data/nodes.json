@@ -2892,7 +2892,7 @@
       "type": "constant",
       "label": "Constant",
       "category": "Inputs",
-      "description": "A constant value: a color from the picker, a float or vector whose components are unbounded, a 2 × 2, 3 × 3 or 4 × 4 matrix on a matrix wire, a boolean (stored as 0 or 1), or one of a list of named choices, which carries the index chosen. Int keeps a float, vector or matrix to whole numbers, and makes a float an integer.",
+      "description": "A constant value: a color from the picker, a float or vector whose components are unbounded, a 2 × 2, 3 × 3 or 4 × 4 matrix on a matrix wire, a boolean (stored as 0 or 1), one of a list of named choices, which carries the index chosen, or a gradient, which sets the exposed Gradient of every Gradient Map wired to it. Int keeps a float, vector or matrix to whole numbers, and makes a float an integer.",
       "tags": [
         "value",
         "color",
@@ -2957,6 +2957,10 @@
             {
               "value": "color",
               "label": "Color"
+            },
+            {
+              "value": "gradient",
+              "label": "Gradient"
             }
           ]
         },
@@ -3093,6 +3097,18 @@
               "matrix2",
               "matrix3",
               "matrix4"
+            ]
+          }
+        },
+        {
+          "id": "gradient",
+          "label": "Value",
+          "kind": "gradient",
+          "group": "Value",
+          "visibleWhen": {
+            "parameter": "type",
+            "values": [
+              "gradient"
             ]
           }
         },
@@ -16802,7 +16818,7 @@
       "type": "gradient-map",
       "label": "Gradient Map",
       "category": "Adjustments",
-      "description": "Colorizes a grayscale input through a gradient: black takes the color at the left end, white the right. Add as many stops as you need, each with its own opacity, blended linearly, smoothly, as constant bands or along a spline.",
+      "description": "Colorizes a grayscale input through a gradient: black takes the color at the left end, white the right. Add as many stops as you need, each with its own opacity, blended linearly, smoothly, as constant bands or along a spline. Expose the gradient to wire a material’s Gradient input to it, and the material can be recolored in the Viewer.",
       "tags": [
         "colorize",
         "colourise",
@@ -16815,6 +16831,13 @@
           "id": "in",
           "label": "In",
           "type": "grayscale"
+        },
+        {
+          "id": "param:gradient",
+          "label": "Gradient",
+          "type": "gradient",
+          "drives": "gradient",
+          "fromInput": true
         }
       ],
       "outputs": [
