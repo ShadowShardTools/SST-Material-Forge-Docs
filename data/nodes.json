@@ -442,6 +442,12 @@
           "drives": "points"
         },
         {
+          "id": "param:innerRadius",
+          "label": "Inner Radius",
+          "type": "grayscale",
+          "drives": "innerRadius"
+        },
+        {
           "id": "param:sweep",
           "label": "Sweep",
           "type": "grayscale",
@@ -8378,110 +8384,6 @@
           "default": 0.5,
           "min": 0,
           "max": 1
-        }
-      ]
-    },
-    {
-      "type": "sdf2d-union",
-      "label": "2D SDF Union",
-      "category": "2D SDF",
-      "description": "Joins up to six signed distance fields into one, each to those before it: everything any of them holds. Join shapes where they meet — Sharp leaves a crisp corner, Smooth a rounded fillet and Chamfer a straight bevel, Smoothness wide — so a cluster of shapes melts into one form in one node rather than a chain of Combines. ID tells the parts apart: each pixel takes a value for the input nearest it, a sixth for A up to 1 for F. An unconnected input holds no shape.",
-      "tags": [
-        "signed distance",
-        "union",
-        "merge",
-        "join",
-        "many",
-        "combine",
-        "smooth union",
-        "blob",
-        "metaball"
-      ],
-      "inputs": [
-        {
-          "id": "a",
-          "label": "A",
-          "type": "sdf2d"
-        },
-        {
-          "id": "b",
-          "label": "B",
-          "type": "sdf2d"
-        },
-        {
-          "id": "c",
-          "label": "C",
-          "type": "sdf2d"
-        },
-        {
-          "id": "d",
-          "label": "D",
-          "type": "sdf2d"
-        },
-        {
-          "id": "e",
-          "label": "E",
-          "type": "sdf2d"
-        },
-        {
-          "id": "f",
-          "label": "F",
-          "type": "sdf2d"
-        },
-        {
-          "id": "param:smoothness",
-          "label": "Smoothness",
-          "type": "grayscale",
-          "drives": "smoothness"
-        }
-      ],
-      "outputs": [
-        {
-          "id": "out",
-          "label": "2D SDF",
-          "type": "sdf2d"
-        },
-        {
-          "id": "id",
-          "label": "ID",
-          "type": "grayscale"
-        }
-      ],
-      "parameters": [
-        {
-          "id": "join",
-          "label": "Join",
-          "kind": "enum",
-          "default": "sharp",
-          "options": [
-            {
-              "value": "sharp",
-              "label": "Sharp"
-            },
-            {
-              "value": "smooth",
-              "label": "Smooth"
-            },
-            {
-              "value": "chamfer",
-              "label": "Chamfer"
-            }
-          ]
-        },
-        {
-          "id": "smoothness",
-          "label": "Smoothness",
-          "kind": "float",
-          "visibleWhen": {
-            "parameter": "join",
-            "values": [
-              "smooth",
-              "chamfer"
-            ]
-          },
-          "default": 0.05,
-          "min": 0,
-          "max": 0.5
         }
       ]
     },
