@@ -13,7 +13,7 @@ PNG, JPEG and WebP are read at 8 bits. **16-bit PNG, OpenEXR (.exr) and Radiance
 Resources holds four kinds of file, each with its own item on its right-click menu:
 
 - **Import Textures…** — images the graph samples. They are decoded and resampled to a square working size.
-- **Import HDRIs…** — environment maps for the 3D view. They are kept exactly as imported, because the lighting wants the whole panorama and the extra light an `.hdr` or `.exr` carries. An imported map appears under **Imported** in the 3D view's environment list, above the ones that ship with the editor.
+- **Import HDRIs…** — environment maps for the 3D view. They are kept exactly as imported, because the lighting wants the whole panorama and the extra light an `.hdr` or `.exr` carries. An imported map appears under **Imported** in the 3D view's environment list, above the ones that ship with the editor. An `.exr` or `.hdr` is an environment map only when you import it here (or add it from the library as one): anywhere else — **Import Textures…**, the asset library, Save As — it is a texture, like any other image, kept at full precision.
 - **Import SVGs…** — `.svg`. Kept as the vector source it arrived as, which is what lets the SVG node redraw it at any size.
 - **Import Fonts…** — `.ttf`, `.otf`, `.woff` and `.woff2`. A font is registered under the name of the file it came from, and the **Text** node can then set type in it. It is kept with the package, so a project opens elsewhere with its fonts.
 
