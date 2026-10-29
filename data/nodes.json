@@ -18058,6 +18058,52 @@
       "parameters": []
     },
     {
+      "type": "if",
+      "label": "If",
+      "category": "Conditional",
+      "description": "In 1 where Condition is true, otherwise In 2.",
+      "tags": [
+        "condition",
+        "boolean",
+        "branch",
+        "select",
+        "mask"
+      ],
+      "inputs": [
+        {
+          "id": "condition",
+          "label": "Condition",
+          "type": "boolean"
+        },
+        {
+          "id": "in1",
+          "label": "In 1",
+          "type": "rgba"
+        },
+        {
+          "id": "in2",
+          "label": "In 2",
+          "type": "rgba"
+        }
+      ],
+      "outputs": [
+        {
+          "id": "out",
+          "label": "Output",
+          "type": "boolean",
+          "adaptive": true
+        }
+      ],
+      "parameters": [
+        {
+          "id": "condition",
+          "label": "Condition",
+          "kind": "bool",
+          "default": true
+        }
+      ]
+    },
+    {
       "type": "if-greater",
       "label": "If Greater",
       "category": "Conditional",
@@ -18094,7 +18140,7 @@
         {
           "id": "out",
           "label": "Output",
-          "type": "grayscale",
+          "type": "boolean",
           "adaptive": true
         }
       ],
@@ -18154,7 +18200,7 @@
         {
           "id": "out",
           "label": "Output",
-          "type": "grayscale",
+          "type": "boolean",
           "adaptive": true
         }
       ],
@@ -18214,7 +18260,7 @@
         {
           "id": "out",
           "label": "Output",
-          "type": "grayscale",
+          "type": "boolean",
           "adaptive": true
         }
       ],
