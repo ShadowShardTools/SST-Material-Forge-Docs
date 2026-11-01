@@ -32,7 +32,7 @@ A good bug report includes:
 1. **Your build details.** In the editor, open **Help → About SST Material Forge** and click **Copy build details**. This gives us your version, operating system, graphics engine and GPU, and it is always our first question.
 2. **What you did**, step by step, and **what you expected** to happen.
 3. **What happened instead.** Screenshots help a lot. If the editor showed an error, **Help → Report a Problem…** copies the details for you.
-4. **A project file**, if the problem is in a particular material and you're happy to share it. A small `.sstpkg` with just the affected material is ideal.
+4. **A project file**, if the problem is in a particular material and you're happy to share it. A small `.sstmfpkg` with just the affected material is ideal.
 
 > [!NOTE]
 > Issues are public. Only attach projects, textures and screenshots you're comfortable sharing with everyone.
