@@ -13,10 +13,10 @@ description: Adding and connecting nodes, adjusting settings, and the Output nod
 
    Two settings on the node say what the material is:
 
-   - **Mode** — **PBR** is a lit surface with the channels above. **Unlit** is a plain unlit shader: its Base Color alone, drawn as it is, with no lighting, no reflections and no relief.
+   - **Mode** — **Simple PBR** is a lit surface with the channels above. **Flat Color** is a plain unlit shader: its Base Color alone, drawn as it is, with no lighting, no reflections and no relief.
    - **Surface Type** — **Opaque** is solid; **Transparent** adds an **Opacity** channel and blends the material where it is thin.
    - **Alpha Clipping**, in Properties when the Output node is selected — a switch and a **Clip Threshold**. Either surface can clip: the material is drawn where its **Opacity** reaches the threshold and cut away where it does not, which is how leaves, grates and fabric edges are made. Turning it on gives the material an Opacity channel even when it is Opaque.
 
-   The settings decide which channels the material has, so choosing Unlit drops the channels it has no use for, and disconnects what fed them. That happens in the same step as the change, so one <kbd>Ctrl</kbd>+<kbd>Z</kbd> brings both back.
+   The settings decide which channels the material has, so choosing Flat Color drops the channels it has no use for, and disconnects what fed them. That happens in the same step as the change, so one <kbd>Ctrl</kbd>+<kbd>Z</kbd> brings both back.
 
    **Add output** under the slots gives the material an output of its own: a slot to wire, named and typed under **Custom Outputs** in Properties — Float, Vector 2, Vector 3 or Vector 4, which is what its port is colored and counted as. Nothing shades it; it is baked and saved beside the material's channels, named after it (`wall_curvature-mask_1024.png`), for whatever reads it. Declare as many as the material needs.

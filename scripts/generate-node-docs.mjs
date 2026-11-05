@@ -21,7 +21,7 @@ const data = JSON.parse(await readFile(join(root, 'data', 'nodes.json'), 'utf8')
 const BLURBS = {
   '2D Noise': 'Random signals to start a surface from — smooth, cellular, fractal and directional noise.',
   Patterns: 'Regular and scattered shapes: bricks, tiles, grids, scatters and atlases.',
-  Splines: 'Curves you draw, carried between nodes on a wire: drawn, filled, mapped, scattered along, moved and lofted.',
+  '2D Splines': 'Curves you draw, carried between nodes on a wire: drawn, filled, mapped, scattered along, moved and lofted.',
   Gradients: 'Ramps and splits across the texture.',
   Inputs: 'Values and resources brought into the graph: textures, text, drawings, coordinates, constants and the material\'s own inputs.',
   Adjustments: 'Tone and color changes that work pixel by pixel: levels, curves, hue, contrast, keying and value remapping.',
