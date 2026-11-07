@@ -15,7 +15,7 @@ To report a problem, use **Help → Report a Problem…** and copy the details, 
 
 ## Which version am I on?
 
-**Help → About SST Material Forge** shows the version, the graphics card WebGPU is running on (where the browser names it) and, on the desktop, the Electron and Chromium it is built with. **Copy build details** puts all of it on the clipboard — include it when you report a problem, since the first question is always which build you are running. The same dialog lists the open-source software included in the application, with each licence.
+**Help → About SST Material Forge** shows the version, the graphics card WebGPU is running on (where the browser names it), the GPU memory node outputs may hold and, on the desktop, the Electron and Chromium it is built with. **Copy build details** puts all of it on the clipboard — include it when you report a problem, since the first question is always which build you are running. The same dialog lists the open-source software included in the application, with each licence.
 
 ## Privacy
 
