@@ -34,14 +34,14 @@ const BLURBS = {
   Channels: 'Splitting, combining and converting channels.',
   Math: 'Arithmetic, ranges, rounding, interpolation, trigonometry, vectors and matrices on whole images, under sub-headings.',
   Conditional: 'Choosing between inputs, per pixel.',
-  SubGraphs: 'Your own subgraphs, used as nodes.',
+  Subgraphs: 'Your own subgraphs, used as nodes.',
   Custom: 'Nodes of your own, written in code.',
   Material: 'The Output node and the package\'s materials used as nodes.',
 };
 
 /** Categories with no fixed nodes, explained instead of listed. */
 const PROSE_ONLY = {
-  SubGraphs:
+  Subgraphs:
     'This heading lists the subgraphs in your project, so what it holds is yours. See [Reusing work with subgraphs](../guide/subgraphs.md) for how to make one and declare its inputs and outputs.',
   Custom:
     'This heading lists the nodes your project defines in code, and those kept in your library under **My Library**, so what it holds is yours. See [Writing your own nodes](../guide/custom-nodes.md) for how to write one and the language they are written in.',

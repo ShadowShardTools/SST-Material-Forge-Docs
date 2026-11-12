@@ -50,8 +50,8 @@ function keycaps(text) {
 const PAGES = [
   ['requirements', 'Requirements', 'What SST Material Forge needs to run, and how working resolution affects GPU memory.',
     [section('Requirements'), section('Resolution and GPU memory', 'Resolution and GPU memory')]],
-  ['workspace', 'The workspace', 'The Forge, Material Viewer and Scene Viewer tabs, and every panel of the editor.',
-    [section('Forge and the Viewers', 'Forge and the Viewers'), section('The workspace', 'The panels')]],
+  ['workspace', 'The workspace', 'Forge, and every panel of the editor.',
+    [section('Forge', 'Forge'), section('The workspace', 'The panels')]],
   ['building-a-material', 'Building a material', 'Adding and connecting nodes, adjusting settings, and the Output node that ends every material.',
     [section('Building a material')]],
   ['ports-and-values', 'Ports and values', 'What port and wire colors mean, and the range of values a node carries.',
@@ -99,8 +99,8 @@ const PAGES = [
 /** Where the guide refers to itself as one page, which the site splits up. */
 const LINKS = {
   workspace: [
-    ['Everything below, up to *Material settings and presets*, happens here.',
-      'Everything in this guide up to [Material settings and presets](./material-settings-and-presets.md) happens here.'],
+    ['(see *Material settings and presets*)',
+      '(see [Material settings and presets](./material-settings-and-presets.md))'],
   ],
   'text-and-drawings': [
     ['Select the node to place it by hand in the 2D View, as below.',

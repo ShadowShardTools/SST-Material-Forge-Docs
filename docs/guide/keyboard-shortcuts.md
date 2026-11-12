@@ -4,7 +4,7 @@ sidebar_position: 23
 description: The default keyboard and mouse bindings.
 ---
 
-Press <kbd>?</kbd> in the editor, or open **Help → Keyboard Shortcuts**, for the complete list, which shows what each command is bound to now. The defaults below can be changed under **Settings → Shortcuts**; the mouse and the graph's own keys cannot.
+Press <kbd>?</kbd> in the editor, or open **Help → Keyboard shortcuts**, for the complete list, which shows what each command is bound to now. The defaults below can be changed under **Settings → Shortcuts**; the mouse and the graph's own keys cannot.
 
 | Keys | Action |
 | --- | --- |

@@ -12,7 +12,7 @@ Turn **Antialias** off for hard-edged type: every texel is then either in a glyp
 
 The glyphs are drawn at the resolution the pass is being rendered at, not scaled up from a smaller picture, so they stay crisp at any size and at any angle — and a 4K export sets them again at 4K. Select the node to place it by hand in the 2D View — see [Placing things by hand](./placing-by-hand.md).
 
-Fonts are imported through **Resources → Import Fonts…**. A material using a font that was not imported with it falls back to a generic family, and Properties says which font is missing rather than quietly choosing another. To let whoever uses the material choose the face in the Viewer, give it a **Font** input, and a **Text** input for the words, and wire them to the node's exposed **Font** and **Text** (see *Material settings and presets*).
+Fonts are imported through **Resources → Import fonts…** (or **Fonts → Import fonts…**). A material using a font that was not imported with it falls back to a generic family, and Properties says which font is missing rather than quietly choosing another. To let whoever uses the material choose the face in the Viewer, give it a **Font** input, and a **Text** input for the words, and wire them to the node's exposed **Font** and **Text** (see *Material settings and presets*).
 
 ## Drawings
 
@@ -22,4 +22,4 @@ Its **Spline** output is the same drawing as curves: every path, rectangle, circ
 
 It is rasterised at the resolution being rendered, not scaled from a small picture, so a logo is sharp in a 256-pixel preview and again in a 4K export. **Antialias** off gives hard edges, one texel either in the drawing or out of it.
 
-Import drawings with **Resources → Import SVGs…**. A file that is not an SVG is refused when it arrives rather than drawn as nothing, and the reason appears under **Help → Report a Problem…**. An imported drawing runs no script and loads nothing from the network: a browser draws SVGs in a restricted mode that forbids both. To let whoever uses the material swap the drawing — a logo, a badge — in the Viewer, give it an **SVG** input and wire it to the node's exposed **Drawing**.
+Import drawings with **Resources → Import vector images (SVG)…** (or the same under **Vector Images**). A file that is not an SVG is refused when it arrives rather than drawn as nothing, and the reason appears under **Help → Report a problem…**. An imported drawing runs no script and loads nothing from the network: a browser draws SVGs in a restricted mode that forbids both. To let whoever uses the material swap the drawing — a logo, a badge — in the Viewer, give it an **SVG** input and wire it to the node's exposed **Drawing**.
